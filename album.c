@@ -6,6 +6,7 @@
 #include "usuario.h"
 #include "album.h"
 #include "playlist.h"
+#include "sistema.h"
 
 
 struct album{
@@ -15,6 +16,7 @@ struct album{
     char *produzidoPor;        
     Midia *midia[21];
     int qtdMidias;
+    int qtdMidiasTotal;
     int ano;
 };
 
@@ -24,7 +26,8 @@ void CriaAlbum(Album *a,char* nomeAlb, char* nArtista,char* gen, char* produtor,
     strcpy(a->genero,gen);
     strcpy(a->produzidoPor,produtor);
     a->ano=ano;
-    a->qtdMidias=qtd;
+    a->qtdMidiasTotal=qtd;
+    a->qtdMidias=0;
 }
 
 Album* AlocaAlbum(){
@@ -40,6 +43,7 @@ Album* AlocaAlbum(){
     return a;
 }
 void ImprimeAlbum(Album *a){
+    
     ImprimeNomeAlbum(a);
     ImprimeArtistaAlbum(a);
     ImprimeGeneroAlbum(a);
@@ -47,13 +51,14 @@ void ImprimeAlbum(Album *a){
     ImprimeqtdMidias(a);
     ImprimeAnoAlbum(a);
     for(int i=0;i<a->qtdMidias;i++){
-        printf("\n\t\t[%02d]",i);
+        printf("\n\t\t[%02d] ",i);
         ImprimeMidia(a->midia[i]);
     }   
 }
 
-void AdicionaMidiaAlbum(Album* a,Midia* m, int posicao){
-    a->midia[posicao]=m;
+void AdicionaMidiaAlbum(Album* a,Midia* m){
+    a->midia[a->qtdMidias]=m;
+    a->qtdMidias++;
 }
 
 
@@ -64,13 +69,22 @@ void AtribuiProdutoraAlbum(Album *a, char* produtora){a->produzidoPor=produtora;
 void AtribuiAnoAlbum(Album *a, int ano){a->ano=ano;}
 void AtribuiqtdMidias(Album *a, int qtd){a->qtdMidias=qtd;}
 
-void ImprimeNomeAlbum(Album *a){printf("\t\t%s\n",a->nomeAlbum);}    
-void ImprimeArtistaAlbum(Album *a){printf("\t\t%s\n",a->nomeArtista);}  
-void ImprimeGeneroAlbum(Album *a){printf("\t\t%s\n",a->genero);}  
-void ImprimeProdutoraAlbum(Album *a){printf("\t\t%s\n",a->produzidoPor);}  
-void ImprimeqtdMidias(Album *a){printf("\t\t%d\n",a->qtdMidias);}  
-void ImprimeAnoAlbum(Album *a){printf("\t\t%d\n",a->ano);}  
+void ImprimeNomeAlbum(Album *a){printf("\n\t\tNome do Album: %s",a->nomeAlbum);}    
+void ImprimeArtistaAlbum(Album *a){printf("\n\t\tNome do Artista: %s",a->nomeArtista);}  
+void ImprimeGeneroAlbum(Album *a){printf("\n\t\tGenero: %s",a->genero);}  
+void ImprimeProdutoraAlbum(Album *a){printf("\n\t\tProduzido por: %s",a->produzidoPor);}  
+void ImprimeqtdMidias(Album *a){printf("\n\t\tQuantidade de Midias: %d",a->qtdMidias);}  
+void ImprimeAnoAlbum(Album *a){printf("\n\t\tAno: %d",a->ano);}  
 
 Midia* RetornaMidiaAlbum(Album *a, int posicao){
     return a->midia[posicao];
+}
+
+void ImprimeDadosBasicosAlbum(Album *a){
+    ImprimeNomeAlbum(a);
+    ImprimeArtistaAlbum(a);
+    ImprimeAnoAlbum(a);
+    ImprimeGeneroAlbum(a);
+    ImprimeProdutoraAlbum(a);
+    printf("\n");
 }

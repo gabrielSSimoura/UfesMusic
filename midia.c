@@ -6,6 +6,7 @@
 #include "usuario.h"
 #include "album.h"
 #include "playlist.h"
+#include "sistema.h"
 
 struct midia{
     int  tipo;                      //1.musica,2.video,3.podcast;    
@@ -67,12 +68,16 @@ void AtribuiTipo(Midia *m, int tipo){m->tipo=tipo;}
 void AtribuiDuracao(Midia *m, float duracao){m->duracao=duracao;}
 void AtribuiNomeProdutora(Midia *m, char* produtora){m->produzidoPor=produtora;}
 
-void ImprimeNomeMidia(Midia *m){printf("\t\t%s\n",m->nomeMidia);}    
-void ImprimeNomeArtista(Midia *m){printf("\t\t%s\n",m->nomeArtista);}
-void ImprimeNomeCompositor(Midia *m){printf("\t\t%s\n",m->nomeCompositor);}   
-void ImprimeGenero(Midia *m){printf("\t\t%s\n",m->genero);}
-void ImprimeDuracao(Midia *m){printf("\t\t%.2f\n",m->duracao);}
-void ImprimeTipo(Midia *m){printf(" %d\n",m->tipo);}
-void ImprimeProdutora(Midia *m){printf("\t\t%s\n",m->produzidoPor);}
+void ImprimeNomeMidia(Midia *m){printf("\t\tNome da Midia: %s\n",m->nomeMidia);}    
+void ImprimeNomeArtista(Midia *m){printf("\t\tNome do Artista: %s\n",m->nomeArtista);}
+void ImprimeNomeCompositor(Midia *m){printf("\t\tNome do Compositor: %s\n",m->nomeCompositor);}   
+void ImprimeGenero(Midia *m){printf("\t\tGenero: %s\n",m->genero);}
+void ImprimeDuracao(Midia *m){printf("\t\tDuracao: %.2f\n",m->duracao);}
+void ImprimeTipo(Midia *m){    
+    printf("\n\t\tTipo da Midia: ");
+    if(m->tipo==1){printf("Musica\n");}
+    else if(m->tipo==2){printf("Video\n");}
+    else if(m->tipo==3){printf("Podcast\n");}
+}
+void ImprimeProdutora(Midia *m){printf("\t\tProduzido por: %s\n",m->produzidoPor);}
 
-    

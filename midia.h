@@ -25,4 +25,6 @@ void ImprimeTipo(Midia *m);
 void ImprimeProdutora(Midia *m);
 
 void DeletaMidiaPrograma(Midia *m);
+
+
 #endif

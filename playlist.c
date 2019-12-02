@@ -6,6 +6,7 @@
 #include "usuario.h"
 #include "album.h"
 #include "playlist.h"
+#include "sistema.h"
 
 struct playlist{
     int tipo;                //1publica,2privada;
@@ -59,10 +60,28 @@ void ImprimePlaylist(Playlist *p){
 }
 
 
-void ApagaPlaylist(Playlist *p){
+void ApagaMidiaPlaylist(Playlist *p,int posicao){
+    p->midia[51] = p->midia[posicao];
+    for(int i=posicao;i<p->qtdMidias;i++){
+        TrocaMidia(p,i,i+1);
+    }
+    p->qtdMidias--;
+}
 
+void TrocaMidia(Playlist *p, int posicao1, int posicao2){
+    Midia *auxiliar;
+    auxiliar=AlocaMidia();
+    auxiliar=p->midia[posicao1];
+    p->midia[posicao1]=p->midia[posicao2];
+    p->midia[posicao2]=auxiliar;
 }
 
 void ImprimeNomePlaylist(Playlist *p){printf("\t\t%s\n",p->nomePlaylist);}    
 void ImprimeColaboradoresPlaylist(Playlist *p){for(int i=0;i<p->qtdColaboradores;i++){printf("\t\t[%02d]",i); printf(" %s\n",p->colaboradores[i]);}}  
 void ImprimeMidiasPlaylist(Playlist *p){for(int i=0;i<p->qtdMidias;i++){printf("\t\t[%02d]",i);ImprimeMidia(p->midia[i]);}}  
+
+void ApagaPlaylist(Playlist *p){
+
+
+
+}

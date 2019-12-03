@@ -10,7 +10,7 @@
 
 
 int MenuInicial(){
-    
+    system("clear");
     printf("\n\t\tBem Vindo!\t\t\n");
     printf("\t\t|----------Ufes Music----------|\t\t\n");    
     printf("\t\t|[01]------Cria Usuario--------|\t\t\n");     
@@ -23,7 +23,7 @@ int MenuInicial(){
 }
 
 void MenuUsuario(){
-    
+    system("clear");
     printf("\n\t\t|[01]------Cria Playlist--------|\t\t\n");
     printf("\t\t|[02]-------Pesquisar-----------|\t\t\n");
     printf("\t\t|[03]-----Sair do Programa------|\t\t\n");
@@ -33,6 +33,7 @@ void MenuUsuario(){
 
 
 void MenuPlaylist (){
+    system("clear");
     printf("\n\t\t|[01]-------Apagar Playlist-------|\t\t\n");
     printf("\t\t|[02]-------Editar Playlist-------|\t\t\n");
     printf("\t\t|[03]--------Sair do Menu---------|\t\t\n");
@@ -43,6 +44,7 @@ void MenuPlaylist (){
 
 
 void MenuDesenvolvedor(){
+    system("clear");
     printf("\n\t\tBem Vindo Desenvolvedor ! O que deseja fazer?\n");
     printf("\t\t|-----------Ufes Music---------|\t\t\n");    
     printf("\t\t|[01]-------Criar Album--------|\t\t\n");
@@ -55,6 +57,7 @@ void MenuDesenvolvedor(){
 }
 
 void MenuPesquisar(){
+    system("clear");
     printf("\n\t\tPesquisar por: ");    
     printf("\n\t\t|[01]-------Nome do Album--------|\t\t\n");
     printf("\t\t|[02]-------Nome da Midia--------|\t\t\n");     
@@ -69,6 +72,7 @@ void MenuPesquisar(){
 }
 
 void MenuAlteraAlbum(){
+    
     printf("\n\t\tO que deseja Alterar: ");    
     printf("\n\t\t|[01]-------Nome do Album--------|\t\t\n");    
     printf("\t\t|[02]-----------Artista-----------|\t\t\n");    
@@ -82,6 +86,7 @@ void MenuAlteraAlbum(){
 }
 
 void MenuAlteraMidia(){
+    
     printf("\n\t\tO que deseja Alterar: ");    
     printf("\n\t\t|[01]-------Nome da Midia--------|\t\t\n");    
     printf("\t\t|[02]-----------Artista-----------|\t\t\n");    
@@ -98,10 +103,12 @@ void MenuAlteraMidia(){
 }
 
 void MenuAlteraPlaylist(){
-     printf("\n\t\tO que deseja Alterar: ");    
-    printf("\n\t\t|[01]---Nome da Playlist---|\t\t\n");      
-    printf("\t\t|[02]------Sair do Menu-----|\t\t\n");
-     printf("\t\tDigite uma das Opcoes: "); 
+    
+    printf("\n\t\tO que deseja Alterar: ");    
+    printf("\n\t\t|[01]---Nome da Playlist---|\t\t\n");
+    printf("\t\t|[02]----=-Apagar Midia-----|\t\t\n");      
+    printf("\t\t|[03]------Sair do Menu-----|\t\t\n");
+    printf("\t\tDigite uma das Opcoes: "); 
     setbuf(stdin, NULL);  
 
 }

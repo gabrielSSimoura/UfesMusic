@@ -66,6 +66,7 @@ void ApagaMidiaPlaylist(Playlist *p,int posicao){
         TrocaMidia(p,i,i+1);
     }
     p->qtdMidias--;
+    printf("\n\t\tMidia apagada com sucesso!");
 }
 
 void TrocaMidia(Playlist *p, int posicao1, int posicao2){

@@ -343,7 +343,7 @@ while(1){
                 ImprimeUsuarioSistema(s);
                 
                 while(1){
-                    int op1=0,id1=0,opMenuAltera=0;
+                    int op1=0,id1=0,opMenuAltera=0,midia=0;
                     MenuPlaylist();
                     op1=LerInteiros();
                     if(op1==1){//Apagar Playlist
@@ -354,7 +354,7 @@ while(1){
                     ImprimeUsuario(usu);
                     break;
                     }
-                    else if(op1==2){
+                    else if(op1==2){//Editar Playlist
                         Playlist* play=AlocaPlaylist();
                         ImprimeUsuario(usu);
                         printf("\n\t\tDigite o id da Playlist que deseja editar: ");
@@ -362,11 +362,19 @@ while(1){
                         play=RetornaPlaylistUsuario(usu,id1);
                         while(1){
                             opMenuAltera=0;
+                            midia=0;
                             MenuAlteraPlaylist();
                             opMenuAltera=LerInteiros();
-                            if(opMenuAltera<1 || opMenuAltera>2){continue;}
-                            else if(opMenuAltera==2){opMenuAltera=0;break;}
-                            else {AlteraPlaylist(play,opMenuAltera);opMenuAltera=0;break;}
+                            if(opMenuAltera<1 || opMenuAltera>3){continue;}
+                            else if(opMenuAltera==3){opMenuAltera=0;break;}
+                            else if(opMenuAltera==1){AlteraPlaylist(play,opMenuAltera);break;}
+                            else if(opMenuAltera==2){
+                                ImprimePlaylist(play);
+                                printf("\n\t\tEscolha a midia que deseja apagar: ");
+                                midia=LerInteiros();
+                                ApagaMidiaPlaylist(play,midia);
+                                continue;
+                            }
                         }
                     }
                     else if(op1==3){break;}//Sair Menu

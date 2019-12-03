@@ -311,8 +311,7 @@ void PreencheSistemaComAlbum(Sistema *s){
     Album *alb=AlocaAlbum();
     DadosAlbum(alb);
     AdicionaAlbumSistema(s,alb);  
-    printf("\n\n");
-    
+    printf("\n\n");    
 }
 void PreencheSistemaComUsuario(Sistema *s,Usuario *usu){
     AdicionaUsuarioSistema(s,usu);  
@@ -321,7 +320,7 @@ int main(){
    Sistema *s=AlocaSistema();
 while(1){
     int escolha=0;
-    escolha=MenuInicial();
+    MenuInicial();
     escolha=LerInteiros(); 
     if(escolha==1){       
         Usuario *usu=AlocaUsuario();

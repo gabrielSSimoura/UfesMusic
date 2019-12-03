@@ -2,14 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "menu.h"
-#include "midia.h"
-#include "usuario.h"
-#include "album.h"
-#include "playlist.h"
-#include "sistema.h"
 
 
-int MenuInicial(){
+
+void MenuInicial(){
     system("clear");
     printf("\n\t\tBem Vindo!\t\t\n");
     printf("\t\t|----------Ufes Music----------|\t\t\n");    
@@ -23,7 +19,7 @@ int MenuInicial(){
 }
 
 void MenuUsuario(){
-    system("clear");
+    
     printf("\n\t\t|[01]------Cria Playlist--------|\t\t\n");
     printf("\t\t|[02]-------Pesquisar-----------|\t\t\n");
     printf("\t\t|[03]-----Sair do Programa------|\t\t\n");
@@ -33,7 +29,7 @@ void MenuUsuario(){
 
 
 void MenuPlaylist (){
-    system("clear");
+    
     printf("\n\t\t|[01]-------Apagar Playlist-------|\t\t\n");
     printf("\t\t|[02]-------Editar Playlist-------|\t\t\n");
     printf("\t\t|[03]--------Sair do Menu---------|\t\t\n");
@@ -57,7 +53,7 @@ void MenuDesenvolvedor(){
 }
 
 void MenuPesquisar(){
-    system("clear");
+    
     printf("\n\t\tPesquisar por: ");    
     printf("\n\t\t|[01]-------Nome do Album--------|\t\t\n");
     printf("\t\t|[02]-------Nome da Midia--------|\t\t\n");     
@@ -74,7 +70,7 @@ void MenuPesquisar(){
 void MenuAlteraAlbum(){
     
     printf("\n\t\tO que deseja Alterar: ");    
-    printf("\n\t\t|[01]-------Nome do Album--------|\t\t\n");    
+    printf("\n\t\t|[01]--------Nome do Album--------|\t\t\n");    
     printf("\t\t|[02]-----------Artista-----------|\t\t\n");    
     printf("\t\t|[03]------------Genero-----------|\t\t\n");
     printf("\t\t|[04]----------Produtora----------|\t\t\n"); 
@@ -88,7 +84,7 @@ void MenuAlteraAlbum(){
 void MenuAlteraMidia(){
     
     printf("\n\t\tO que deseja Alterar: ");    
-    printf("\n\t\t|[01]-------Nome da Midia--------|\t\t\n");    
+    printf("\n\t\t|[01]--------Nome da Midia--------|\t\t\n");    
     printf("\t\t|[02]-----------Artista-----------|\t\t\n");    
     printf("\t\t|[03]-----------Compositor--------|\t\t\n");
     printf("\t\t|[04]------------Genero-----------|\t\t\n"); 
@@ -105,8 +101,8 @@ void MenuAlteraMidia(){
 void MenuAlteraPlaylist(){
     
     printf("\n\t\tO que deseja Alterar: ");    
-    printf("\n\t\t|[01]---Nome da Playlist---|\t\t\n");
-    printf("\t\t|[02]----=-Apagar Midia-----|\t\t\n");      
+    printf("\n\t\t|[01]----Nome da Playlist---|\t\t\n");
+    printf("\t\t|[02]------Apagar Midia-----|\t\t\n");      
     printf("\t\t|[03]------Sair do Menu-----|\t\t\n");
     printf("\t\tDigite uma das Opcoes: "); 
     setbuf(stdin, NULL);  

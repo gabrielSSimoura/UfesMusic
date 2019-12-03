@@ -16,7 +16,7 @@ void ImprimeSenhaEncriptada(Usuario *u);
 
 char* RetornaLogin(Usuario *u);
 char* RetornaSenha(Usuario *u);
-//void AdicionaPlaylistUsuario(Usuario *u,Playlist *p);
+Playlist* RetornaPlaylistUsuario(Usuario *u, int idplay);
 
 
 #endif 

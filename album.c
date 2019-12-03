@@ -65,6 +65,8 @@ void AdicionaMidiaAlbum(Album* a,Midia* m){
 void AtribuiNomeAlbum(Album *a, char* nome){a->nomeAlbum=nome;}
 void AtribuiArtistaAlbum(Album *a, char* nomeArtista){a->nomeArtista=nomeArtista;}
 void AtribuiGenero(Album *a, char* genero){a->genero=genero;}
+
+
 void AtribuiProdutoraAlbum(Album *a, char* produtora){a->produzidoPor=produtora;}
 void AtribuiAnoAlbum(Album *a, int ano){a->ano=ano;}
 void AtribuiqtdMidias(Album *a, int qtd){a->qtdMidias=qtd;}
@@ -87,4 +89,40 @@ void ImprimeDadosBasicosAlbum(Album *a){
     ImprimeGeneroAlbum(a);
     ImprimeProdutoraAlbum(a);
     printf("\n");
+}
+
+void PesquisaAlbum(Album *a, char *nome){
+    if(!(strcmp(a->nomeAlbum,nome))){
+        printf("\n");
+        ImprimeAlbum(a);
+    }
+}
+
+void PesquisaMidiaAlbum(Album *a, char* nomeM){
+    for(int i=0;i<a->qtdMidiasTotal;i++){
+        PesquisaMidia(a->midia[i],nomeM);
+    }
+}
+
+void PesquisaArtistaMidiaAlbum(Album *a, char* nomeA){
+    for(int i=0;i<a->qtdMidiasTotal;i++){
+       PesquisaArtistaMidia(a->midia[i],nomeA);
+    }
+}
+
+void PesquisarNomeCompositorAlbum(Album *a, char* nomeC){
+    for(int i=0;i<a->qtdMidiasTotal;i++){
+       PesquisarNomeCompositorMidia(a->midia[i],nomeC);
+    }
+}
+void PesquisarGeneroAlbum(Album *a, char* nomeG){
+    for(int i=0;i<a->qtdMidiasTotal;i++){
+       PesquisarGeneroMidia(a->midia[i], nomeG);
+    }
+}
+void PesquisarProdutoraAlbum(Album *a, char* nomeP){
+    for(int i=0;i<a->qtdMidiasTotal;i++){
+        PesquisarProdutoraMidia(a->midia[i], nomeP);
+       
+    }
 }

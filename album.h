@@ -25,6 +25,12 @@ void ImprimeGeneroAlbum(Album *a);
 void ImprimeProdutoraAlbum(Album *a);
 void ImprimeqtdMidias(Album *a);
 void ImprimeAnoAlbum(Album *a);
+void PesquisaAlbum(Album *a, char *nome);
+void PesquisaMidiaAlbum(Album *a, char* nomeM);
+void PesquisaArtistaMidiaAlbum(Album *a, char* nomeA);
+void PesquisarNomeCompositorAlbum(Album *a, char* nomeC);
+void PesquisarGeneroAlbum(Album *a, char* nomeG);
+void PesquisarProdutoraAlbum(Album *a, char* nomeP);
 
 Midia* RetornaMidiaAlbum(Album *a, int posicao);
 

@@ -81,3 +81,7 @@ char* RetornaLogin(Usuario *u){
 char* RetornaSenha(Usuario *u){
     return u->senha;
 }
+
+Playlist* RetornaPlaylistUsuario(Usuario *u, int idplay){
+    return u->play[idplay];
+}

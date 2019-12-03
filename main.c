@@ -8,15 +8,16 @@
 #include "playlist.h"
 #include "sistema.h"
 
-Midia* DadosMidia();
-void DadosAlbum(Album* alb);
-Playlist* DadosPlaylist();
-Usuario* DadosUsuario();
+void DadosMidia(Midia *m);
+void DadosAlbum(Album *alb);
+void DadosPlaylist(Playlist *play);
+void DadosUsuario(Usuario *usu);
 
 
-int VerificaOpcao(int opinicial, int opfinal);
-void AlteraMidia(Midia *m,char escolha);
-void AlteraAlbum(Album *a,char escolha);
+
+void AlteraMidia(Midia *m,int escolha);
+void AlteraAlbum(Album *a,int escolha);
+void AlteraPlaylist(Playlist *p, int escolha);
 
 void PreencheSistemaComAlbum(Sistema *s);
 void PreencheSistemaComUsuario(Sistema *s,Usuario *usu);
@@ -25,6 +26,7 @@ void PreenchePlaylst(Playlist* p,Album *a);
 
 char* LeDados();
 int LerInteiros();
+int VerificaOpcao(int opinicial, int opfinal);
 float LerFloat();
 
 int VerificaOpcao(int opinicial, int opfinal){
@@ -56,24 +58,21 @@ float LerFloat(){
 }
 void PreencheAlbum(Album *alb, int qtd){
     Midia* m;
-
     for(int i=0;i<qtd;i++){
         m=AlocaMidia();
-        m=DadosMidia();        
+        DadosMidia(m);        
         AdicionaMidiaAlbum(alb,m);
     }
 }
-Usuario* DadosUsuario(){
-    Usuario *u=AlocaUsuario();
+ void DadosUsuario(Usuario *usu){
+    
     char* lgin=(char*)malloc(50);
     char* snha=(char*)malloc(50);
     printf("\n\t\tLogin : ");
     lgin=LeDados();
     printf("\t\tSenha: ");
     snha=LeDados();
-
-    CriaUsuario(u,lgin,snha);
-    return u;
+    CriaUsuario(usu,lgin,snha);    
 }
 void DadosAlbum(Album *alb){
     
@@ -99,24 +98,46 @@ void DadosAlbum(Album *alb){
     PreencheAlbum(alb,qtd);    
 
 }
-Midia* DadosMidia(){
-    Midia* m=AlocaMidia();
+void DadosMidia(Midia *m){
+    
     char* nome=(char*)malloc(50);
     char* nomeArtista=(char*)malloc(50);
+    char* nomeArtista2=(char*)malloc(50);
     char* nomeCompositor=(char*)malloc(50);
+    char* nomeCompositor2=(char*)malloc(50);
     char* genero=(char*)malloc(50);
     char* produtora=(char*)malloc(50);
-    int tipo;
+    int tipo,qtdA, qtdC;
     float duracao;
 
     printf("\n\t\tTipo da midia [01]Musica, [02]Video, [03]Podcast: ");
     tipo=LerInteiros();
     printf("\t\tNome da midia: ");
     nome=LeDados();
-    printf("\t\tNome do artista: ");
-    nomeArtista=LeDados();
-    printf("\t\tNome Compositor: ");
-    nomeCompositor=LeDados();
+    printf("\t\tQuantidade de artistas (MAX 2): ");
+    qtdA=LerInteiros();
+    if(qtdA==1){
+        printf("\t\tArtista [00]: ");
+        nomeArtista=LeDados();
+    }
+    else if(qtdA==2){
+         printf("\t\tArtista [00]: ");
+        nomeArtista=LeDados();
+         printf("\t\tArtista [01]: ");
+        nomeArtista2=LeDados();
+    }
+    printf("\t\tQuantidade de Compositores (MAX 2): ");
+    qtdC=LerInteiros();
+    if(qtdC==1){
+        printf("\t\tCompositor [00]: ");
+        nomeCompositor=LeDados();
+    }
+    else if(qtdC==2){
+         printf("\t\tCompositor [00]: ");
+        nomeCompositor=LeDados();
+         printf("\t\tCompositor [01]: ");
+        nomeCompositor2=LeDados();
+    }    
     printf("\t\tNome produtora: ");
     produtora=LeDados();
     printf("\t\tGenero: ");
@@ -124,11 +145,10 @@ Midia* DadosMidia(){
     printf("\t\tDuracao: ");
     duracao=LerFloat();
 
-    CriaMidia(m,nome,nomeArtista,nomeCompositor,genero,produtora,tipo,duracao);
-    return m;
+    CriaMidia(m, nome, nomeArtista, nomeArtista2, nomeCompositor, nomeCompositor2,genero, produtora, tipo,duracao, qtdA,qtdC);
 }
-Playlist* DadosPlaylist(){
-    Playlist *p=AlocaPlaylist();
+void DadosPlaylist(Playlist *play){
+    
     char *nomep=(char*)malloc(50);
     char *nomeColab1=(char*)malloc(50);
     char *nomeColab2=(char*)malloc(50);
@@ -149,78 +169,122 @@ Playlist* DadosPlaylist(){
         nomeColab2=LeDados();
     }
 
-    CriaPlaylist(p,nomep,nomeColab1, nomeColab2, qtdColab, qtdMidia);
-    return p;
+    CriaPlaylist(play,nomep,nomeColab1, nomeColab2, qtdColab, qtdMidia);
+   
 }
-void AlteraMidia(Midia *m,char escolha){
+void AlteraMidia(Midia *m,int escolha){
     char *nome=(char*)malloc(50);
-    int num;
+    int num,op,qtdA,qtdC;
     float fnum;
-    if(escolha=='1'){
+    if(escolha==1){
         printf("\n\t\tNome da midia: ");
         nome=LeDados();
         AtribuiNomeMidia(m,nome);
     }
-    else if(escolha=='2'){
-        printf("\n\t\tNome do artista: ");
-        nome=LeDados();
-        AtribuiNomeArtista(m,nome);
+    else if(escolha==2){   
+            qtdA=RetornaQtdArtista(m);
+            if(qtdA==1){     
+                printf("\n\t\tNome do artista: ");
+                nome=LeDados();
+                AtribuiNomeArtista1(m,nome);
+            }
+            else if(qtdA==2){
+                printf("\n\t\tQual dos Artistas deseja alterar (0 ou 1): ");
+                op=LerInteiros();
+                if(op==1){
+                    printf("\n\t\tNome do artista: ");
+                    nome=LeDados();
+                    AtribuiNomeArtista1(m,nome);
+                }
+                else if(op==2){
+                    printf("\n\t\tNome do artista: ");
+                    nome=LeDados();
+                    AtribuiNomeArtista2(m,nome);
+                }
+            }
+        }
+    else if(escolha==3){
+        qtdC=RetornaQtdCompositor(m);
+        if(qtdC==1){
+            printf("\n\t\tNome Compositor: ");
+            nome=LeDados();
+            AtribuiNomeCompositor1(m,nome);
+        }
+        else if(qtdC==2){
+            printf("\n\t\tQual dos Compositores deseja alterar (0 ou 1): ");
+            op=LerInteiros();        
+            if(op==1){
+                printf("\n\t\tNome Compositor: ");
+                nome=LeDados();
+                AtribuiNomeCompositor1(m,nome);
+            }
+            else if(op==2){
+                printf("\n\t\tNome Compositor: ");
+                nome=LeDados();
+                AtribuiNomeCompositor2(m,nome);
+            }
+        
+        }
     }
-    else if(escolha=='3'){
-        printf("\n\t\tNome Compositor: ");
-        nome=LeDados();
-        AtribuiNomeCompositor(m,nome);
-    }
-    else if(escolha=='4'){
+        
+    else if(escolha==4){
         printf("\n\t\tGenero: ");
         nome=LeDados();
         AtribuiNomeGenero(m,nome);
     }
-    else if(escolha=='5'){
-        printf("\n\t\tTipo: ");
+    else if(escolha==5){
+        printf("\n\t\tTipo, [01]Musica [02]Video [03]Podcast:  ");
         num=LerInteiros();
         AtribuiTipo(m,num);
     }
-    else if(escolha=='6'){
+    else if(escolha==6){
         printf("\n\t\tDuracao: ");
         fnum=LerFloat();
         AtribuiDuracao(m,fnum);
     }
-    else if(escolha=='7'){
+    else if(escolha==7){
        printf("\n\t\tNome produtora: ");
        nome=LeDados();
-       AtribuiNomeProdutora(m,nome);   
-
+       AtribuiNomeProdutora(m,nome);
     }
 }
-void AlteraAlbum(Album *a,char escolha){
+void AlteraAlbum(Album *a,int escolha){
     char *nome=(char*)malloc(50);
     int num;    
-    if(escolha=='1'){
+    if(escolha==1){
         printf("\n\t\tNome do Album: ");
         nome=LeDados();
         AtribuiNomeAlbum(a,nome);
     }
-    else if(escolha=='2'){
+    else if(escolha==2){
         printf("\n\t\tNome do artista: ");
         nome=LeDados();
         AtribuiArtistaAlbum(a,nome);
     }
-    else if(escolha=='3'){
+    else if(escolha==3){
         printf("\n\t\tGenero: ");
         nome=LeDados();
         AtribuiGenero(a,nome);
     }
-    else if(escolha=='4'){
+    else if(escolha==4){
        printf("\n\t\tNome produtora: ");
        nome=LeDados();
        AtribuiProdutoraAlbum(a,nome); 
     }
-    else if(escolha=='5'){
+    else if(escolha==5){
         printf("\n\t\tAno do Album: ");
         num=LerInteiros();
         AtribuiAnoAlbum(a,num);
     }
+}
+void AlteraPlaylist(Playlist *p, int escolha){
+    char *nome=(char*)malloc(50);
+    int num;
+    if(escolha==1){
+        printf("\n\t\tNome da Playlist: ");
+        nome=LeDados();
+        AtribuiNomePlaylist(p,nome);        
+    }    
 }
 void PreenchePlaylist(Playlist* p, Album *a){
     Midia *m=AlocaMidia();
@@ -253,17 +317,15 @@ void PreencheSistemaComAlbum(Sistema *s){
 void PreencheSistemaComUsuario(Sistema *s,Usuario *usu){
     AdicionaUsuarioSistema(s,usu);  
 }
-
 int main(){    
    Sistema *s=AlocaSistema();
-
 while(1){
     int escolha=0;
     escolha=MenuInicial();
-
     escolha=LerInteiros(); 
     if(escolha==1){       
-        Usuario *usu=DadosUsuario();
+        Usuario *usu=AlocaUsuario();
+        DadosUsuario(usu);
         PreencheSistemaComUsuario(s,usu);
         while(1){            
             int id=0,opcao=0; 
@@ -279,9 +341,9 @@ while(1){
                 albm=RetornaAlbumEscolhido(s,id);
                 PreencheUsuario(usu,albm);
                 ImprimeUsuarioSistema(s);
-                //MenuPlaylistUsuario;
+                
                 while(1){
-                    int op1=0,id1=0;
+                    int op1=0,id1=0,opMenuAltera=0;
                     MenuPlaylist();
                     op1=LerInteiros();
                     if(op1==1){//Apagar Playlist
@@ -292,26 +354,77 @@ while(1){
                     ImprimeUsuario(usu);
                     break;
                     }
-                    else if(op1==2){//Editar Playlist
-
+                    else if(op1==2){
+                        Playlist* play=AlocaPlaylist();
+                        ImprimeUsuario(usu);
+                        printf("\n\t\tDigite o id da Playlist que deseja editar: ");
+                        id1=LerInteiros();
+                        play=RetornaPlaylistUsuario(usu,id1);
+                        while(1){
+                            opMenuAltera=0;
+                            MenuAlteraPlaylist();
+                            opMenuAltera=LerInteiros();
+                            if(opMenuAltera<1 || opMenuAltera>2){continue;}
+                            else if(opMenuAltera==2){opMenuAltera=0;break;}
+                            else {AlteraPlaylist(play,opMenuAltera);opMenuAltera=0;break;}
+                        }
                     }
                     else if(op1==3){break;}//Sair Menu
 
                     else {printf("\n\t\tOpcao Invalida, tente novamente!"); continue;}
-                }
-                
+                }                
             }
             else if(opcao==2){
-                //Nada
+                //Pesquisar:
+                while(1){
+                    int op=0;
+                    char *nomes;
+                    MenuPesquisar();
+                    op=LerInteiros();
+                    if(op==1){//Nome Album
+                        printf("\n\t\tDigite o nome do Album que deseja pesquisar: ");
+                        nomes=LeDados();
+                        PequisarNomeAlbum(s,nomes);
+                        continue;
+                    }
+                    else if(op==2){//Nome Midia
+                        printf("\n\t\tDigite o nome da Midia que deseja pesquisar: ");
+                        nomes=LeDados();
+                        PesquisarNomeMidia(s,nomes);
+                        continue;
+                    }
+                    else if(op==3){//Nome Artista
+                        printf("\n\t\tDigite o nome do Artista que deseja pesquisar: ");
+                        nomes=LeDados();
+                        PesquisarNomeArtista(s,nomes);
+                        continue;
+                    }
+                    else if(op==4){
+                        printf("\n\t\tDigite o nome do Compositor que deseja pesquisar: ");
+                        nomes=LeDados();
+                        PesquisarNomeCompositor(s,nomes);
+                    }
+                    else if(op==5){
+                        printf("\n\t\tDigite o nome da Produtora que deseja pesquisar: ");
+                        nomes=LeDados();
+                        PesquisarProdutora(s,nomes);
+                        
+                    }
+                    else if(op==6){
+                        printf("\n\t\tDigite o Genero que deseja pesquisar: ");
+                        nomes=LeDados();
+                        PesquisarGenero(s,nomes);
+                    }
+                    else if(op==7){break;}
+                    else continue;
+                }            
             }
             else if(opcao==3){break;}
             else {printf("\n\t\tOpcao Invalida, tente novamente!"); continue;}
         }
         continue;
     }
-
-    else if(escolha==2){ 
-                  
+    else if(escolha==2){                   
        //OPçao Desenvolvedor    
        printf("\n\t\tDigite a senha: ");
        int senha;
@@ -322,19 +435,55 @@ while(1){
             int id1=0,opcao1=0;  
             MenuDesenvolvedor();
             opcao1=LerInteiros();
-            if(opcao1==1){
-               //Criar Album
+            if(opcao1==1){              
                PreencheSistemaComAlbum(s);
             }
-            else if(opcao1==2){break;}
+            else if(opcao1==3){//Editar Album;
+                int alb=0;
+                 int opA=0;
+                Album *alterar=AlocaAlbum();
+                ImprimeAlbunsSistema(s);
+                printf("Escolha o Album que deseja editar: ");
+                alb=LerInteiros();
+                alterar=RetornaAlbumEscolhido(s,alb);
+                while(1){
+                    opA=0;
+                    MenuAlteraAlbum();
+                    opA=LerInteiros();
+                    if(opA<1 ||opA>6){continue;}
+                    else if(opA==6){opA=0;break;}
+                    else{AlteraAlbum(alterar,opA); opA=0; break;}
+                }                
+            }
+            else if(opcao1==2){//EditarMidia
+                int mid=0,alb=0, opM=0;
+                Album *alterar=AlocaAlbum();
+                Midia *midiaAltera=AlocaMidia();
+                ImprimeAlbunsSistema(s);
+                printf("\n\t\tSelecione o Album: ");
+                alb=LerInteiros();
+                alterar=RetornaAlbumEscolhido(s,alb);
+                ImprimeAlbum(alterar);
+                printf("Escolha a Midia que deseja editar: ");
+                mid=LerInteiros();
+                midiaAltera=RetornaMidia(s,alb,mid);
+                while(1){
+                    opM=0;
+                    MenuAlteraMidia();
+                    opM=LerInteiros();
+                    if(opM<1 || opM>8){continue;}
+                    else if(opM==8){opM=0;break;}
+                    else{AlteraMidia(midiaAltera,opM);opM=0; break;}
+                }
+                
+            }
+         if(opcao1==4){break;}   
         }
         continue;
         }
     }
-    else if(escolha==3){return 0;}
-    
+    else if(escolha==3){return 0;}    
     else {printf("\n\t\tOpcao Invalida! Tente Novamente.");continue;}
-
     }     
 return 0;
 }

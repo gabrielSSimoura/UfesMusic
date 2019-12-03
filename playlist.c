@@ -35,11 +35,11 @@ void CriaPlaylist(Playlist *p, char* nomep, char* colab1, char* colab2, int qtdC
     p->qtdColaboradores=qtdColab;
     p->qtdMidias=0;
     if(qtdColab==1){
-        strcpy(p->colaboradores[1],colab1);
+        strcpy(p->colaboradores[0],colab1);
     }
     else if(qtdColab==2){
-        strcpy(p->colaboradores[1],colab1);
-        strcpy(p->colaboradores[2],colab2);
+        strcpy(p->colaboradores[0],colab1);
+        strcpy(p->colaboradores[1],colab2);
     }
 }
 
@@ -76,12 +76,22 @@ void TrocaMidia(Playlist *p, int posicao1, int posicao2){
     p->midia[posicao2]=auxiliar;
 }
 
-void ImprimeNomePlaylist(Playlist *p){printf("\t\t%s\n",p->nomePlaylist);}    
-void ImprimeColaboradoresPlaylist(Playlist *p){for(int i=0;i<p->qtdColaboradores;i++){printf("\t\t[%02d]",i); printf(" %s\n",p->colaboradores[i]);}}  
-void ImprimeMidiasPlaylist(Playlist *p){for(int i=0;i<p->qtdMidias;i++){printf("\t\t[%02d]",i);ImprimeMidia(p->midia[i]);}}  
+void ImprimeNomePlaylist(Playlist *p){
+        printf("\t\t%s\n",p->nomePlaylist);
+    }    
+void ImprimeColaboradoresPlaylist(Playlist *p){
+    for(int i=0;i<p->qtdColaboradores;i++){
+        printf("\t\t[%02d]",i);
+        printf(" %s\n",p->colaboradores[i]);
+        }
+    }  
+void ImprimeMidiasPlaylist(Playlist *p){
+    for(int i=0;i<p->qtdMidias;i++){
+        printf("\t\t[%02d]",i);
+        ImprimeMidia(p->midia[i]);
+        }
+    }  
 
-void ApagaPlaylist(Playlist *p){
-
-
-
+void AtribuiNomePlaylist(Playlist *p, char *nomep){
+    p->nomePlaylist=nomep;
 }

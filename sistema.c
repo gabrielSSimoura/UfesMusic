@@ -46,7 +46,7 @@ void AdicionaUsuarioSistema(Sistema *s, Usuario *u){
 
 void ImprimeAlbunsSistema(Sistema *s){
     for(int i=0;i<s->qtdAlbuns;i++){
-        printf("\t\tAlbum [%02d]: ",i);
+        printf("\n\t\tAlbum [%02d]: ",i);
         ImprimeDadosBasicosAlbum(s->albuns[i]);
     }
 }
@@ -68,4 +68,42 @@ int VerificaSenhaDev(Sistema *s,int senha){
 
 Album* RetornaAlbumEscolhido(Sistema *s, int identificador){
     return s->albuns[identificador];
+}
+
+Midia* RetornaMidia(Sistema *s, int idAlbum, int idMidia){
+    return RetornaMidiaAlbum(s->albuns[idAlbum], idMidia);
+}
+
+
+void PequisarNomeAlbum(Sistema *s, char* nomeAlb){
+    for(int i=0;i<s->qtdAlbuns;i++){
+        PesquisaAlbum(s->albuns[i], nomeAlb);
+    }
+}
+void PesquisarNomeMidia(Sistema *s, char* nomeMid){
+    for(int j=0;j<s->qtdAlbuns;j++){
+        PesquisaMidiaAlbum(s->albuns[j],nomeMid);
+    }
+}
+void PesquisarNomeArtista(Sistema *s, char* nomeArt){
+    for(int j=0;j<s->qtdAlbuns;j++){
+        PesquisaArtistaMidiaAlbum(s->albuns[j],nomeArt);
+    }
+}
+
+void PesquisarNomeCompositor(Sistema *s, char* nomeC){
+    for(int j=0;j<s->qtdAlbuns;j++){
+        PesquisarNomeCompositorAlbum(s->albuns[j],nomeC);
+    }
+
+}
+void PesquisarGenero(Sistema *s, char* nomeG){
+    for(int j=0;j<s->qtdAlbuns;j++){
+        PesquisarGeneroAlbum(s->albuns[j],nomeG);
+    }
+}
+void PesquisarProdutora(Sistema *s, char* nomeP){
+    for(int j=0;j<s->qtdAlbuns;j++){
+        PesquisarProdutoraAlbum(s->albuns[j],nomeP);
+    }
 }

@@ -9,5 +9,8 @@ void MenuUsuario();
 void MenuPlaylist();
 void MenuDesenvolvedor();
 void MenuPesquisar();
+void MenuAlteraAlbum();
+void MenuAlteraMidia();
+void MenuAlteraPlaylist();
 
 #endif 

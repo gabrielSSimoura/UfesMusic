@@ -57,8 +57,20 @@ void ImprimeUsuarioSistema(Sistema *s){
     }
 }
 
-Usuario* VerificaUsuarioSistema(Sistema *s,char *login, char *senha){
-  
+int VerificaUsuarioSistema(Sistema *s,char *login, char *senha){
+  for(int i=0;i<=s->qtdUsuario;i++){
+      if(strcmp(login,RetornaLogin(s->usuarios[i]))){
+          if(strcmp(senha,RetornaSenha(s->usuarios[i]))){
+              printf("\n\t\tLogin bem sucedido!");
+              return i;
+          }
+      }
+  }
+  printf("\n\t\tUsuario não encontrado");
+  return -1;
+}
+Usuario* RetornaUsuarioSistema(Sistema *s, int posicao){
+    return s->usuarios[posicao];
 }
 
 int VerificaSenhaDev(Sistema *s,int senha){
@@ -106,4 +118,19 @@ void PesquisarProdutora(Sistema *s, char* nomeP){
     for(int j=0;j<s->qtdAlbuns;j++){
         PesquisarProdutoraAlbum(s->albuns[j],nomeP);
     }
+}
+
+void AtribuiQtdAlbunsSistema(Sistema *s,int qtd){
+    s->qtdAlbuns=qtd;
+}
+
+int RetornaQtdAlbumSistema(Sistema *s){
+    return s->qtdAlbuns;
+}
+
+void AtribuiQtdUsuariosSistema(Sistema *s, int qtdU){
+    s->qtdUsuario=qtdU;
+}
+int RetornaQtdUsuariosSistema(Sistema *s){
+    return s->qtdUsuario;
 }

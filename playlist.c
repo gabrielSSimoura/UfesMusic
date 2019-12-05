@@ -30,10 +30,11 @@ Playlist* AlocaPlaylist(){
     return p;
 }
 
-void CriaPlaylist(Playlist *p, char* nomep, char* colab1, char* colab2, int qtdColab, int qtdMidia){
+void CriaPlaylist(Playlist *p, char* nomep, char* colab1, char* colab2, int qtdColab, int qtdMidia, int tipo){
     strcpy(p->nomePlaylist,nomep);
     p->qtdColaboradores=qtdColab;
     p->qtdMidias=0;
+    p->tipo=tipo;
     if(qtdColab==1){
         strcpy(p->colaboradores[0],colab1);
     }
@@ -95,4 +96,11 @@ void ImprimeMidiasPlaylist(Playlist *p){
 
 void AtribuiNomePlaylist(Playlist *p, char *nomep){
     p->nomePlaylist=nomep;
+}
+
+void ImprimePlaylistFavorita(Playlist *playfav){
+    printf("\n\t\tPlaylist Favorita: ");
+    ImprimeNomePlaylist(playfav);
+    ImprimeColaboradoresPlaylist(playfav);
+    ImprimeMidiasPlaylist(playfav);
 }

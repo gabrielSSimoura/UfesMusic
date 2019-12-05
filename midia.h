@@ -51,31 +51,63 @@ void AtribuiNomeCompositor1(Midia *m, char* nomeCompositor);
 */
 void AtribuiNomeCompositor2(Midia *m, char* nomeCompositor);
 
-
-
+/*Altera Genero midia
+*inputs: Midia *a e caracter;
+*outputs: nenhum;
+*/
 void AtribuiNomeGenero(Midia *m, char* genero);
+
+/*Altera Tipo midia
+*inputs: Midia *a e caracter;
+*outputs: nenhum;
+*/
 void AtribuiTipo(Midia *m, int tipo);
+
+/*Altera duração midia
+*inputs: Midia *a e caracter;
+*outputs: nenhum;
+*/
 void AtribuiDuracao(Midia *m, float duracao);
+
+/*Altera Nome Produtora midia
+*inputs: Midia *a e caracter;
+*outputs: nenhum;
+*/
 void AtribuiNomeProdutora(Midia *m, char* produtora);
 
-void ImprimeNomeMidia(Midia *m);    
-void ImprimeNomeArtista1(Midia *m);
-void ImprimeNomeCompositor1(Midia *m);
-void ImprimeNomeArtista2(Midia *m);
-void ImprimeNomeCompositor2(Midia *m);
-void ImprimeGenero(Midia *m);
-void ImprimeDuracao(Midia *m);
-void ImprimeTipo(Midia *m);
-void ImprimeProdutora(Midia *m);
+
+void ImprimeNomeMidia(Midia *m);                    // |
+void ImprimeNomeArtista1(Midia *m);                 // |        --> Funções que imprime dados da midia:
+void ImprimeNomeCompositor1(Midia *m);              // |            -Nome; -Compositor; -Duração; -Tipo; etc;
+void ImprimeNomeArtista2(Midia *m);                 // |        --> Imprime as midias encontradas;
+void ImprimeNomeCompositor2(Midia *m);              // |
+void ImprimeGenero(Midia *m);                       // |
+void ImprimeDuracao(Midia *m);                     //  |
+void ImprimeTipo(Midia *m);                        //  |
+void ImprimeProdutora(Midia *m);                   //  |
 
 
-void PesquisaMidia(Midia *m, char* nome);
-void PesquisaArtistaMidia(Midia *m, char* nomeA);
-void PesquisarNomeCompositorMidia(Midia *m, char* nomeC);
-void PesquisarGeneroMidia(Midia *m, char* nomeG);
-void PesquisarProdutoraMidia(Midia *m, char* nomeP);
+void PesquisaMidia(Midia *m, char* nome);                   //|
+void PesquisaArtistaMidia(Midia *m, char* nomeA);           //|  --> Funções que Pesquisam as midias que possuem os dados iguais ao inseridos
+void PesquisarNomeCompositorMidia(Midia *m, char* nomeC);   //|  --> Imprime as midias encontradas;
+void PesquisarGeneroMidia(Midia *m, char* nomeG);           //|
+void PesquisarProdutoraMidia(Midia *m, char* nomeP);        //|
 
+/*Apaga Midia do programa todo
+*inputs: Midia *a ;
+*outputs: nenhum;
+*/
 void DeletaMidiaPrograma(Midia *m);
+
+/*Retorna quantidade de artista atual
+*inputs: Midia *a;
+*outputs: inteiro;
+*/
 int RetornaQtdArtista(Midia *m);
+
+/*Retorna quantidade de compositores atual
+*inputs: Midia *a;
+*outputs: inteiro;
+*/
 int RetornaQtdCompositor(Midia *m);
 #endif

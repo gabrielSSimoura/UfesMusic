@@ -10,8 +10,9 @@ void MenuInicial(){
     printf("\n\t\tBem Vindo!\t\t\n");
     printf("\t\t|----------Ufes Music----------|\t\t\n");    
     printf("\t\t|[01]------Cria Usuario--------|\t\t\n");     
-    printf("\t\t|[02]--Opcao de Desenvolvedor--|\t\t\n");   
-    printf("\t\t|[03]-----Sair do Programa-----|\t\t\n\n"); 
+    printf("\t\t|[02]--Opcao de Desenvolvedor--|\t\t\n"); 
+    printf("\t\t|[03]----------Login-----------|\t\t\n");
+    printf("\t\t|[04]-----Sair do Programa-----|\t\t\n\n"); 
 
     printf("\t\tDigite uma das Opcoes: ");
     setbuf(stdin, NULL); 
@@ -19,10 +20,11 @@ void MenuInicial(){
 }
 
 void MenuUsuario(){
-    
+    system("clear");
     printf("\n\t\t|[01]------Cria Playlist--------|\t\t\n");
     printf("\t\t|[02]-------Pesquisar-----------|\t\t\n");
-    printf("\t\t|[03]-----Sair do Programa------|\t\t\n");
+    printf("\t\t|[03]--Criar Playlist Favorita--|\t\t\n");
+    printf("\t\t|[04]-----Sair do Programa------|\t\t\n");
     printf("\t\tO que gostaria de fazer ?: ");  
     setbuf(stdin, NULL);  
 }

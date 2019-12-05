@@ -49,9 +49,9 @@ int VerificaSenhaDev(Sistema *s,int senha);
 
 /*Recebe o Sistema por parametro e os caracteres de login e senha do usuario;
 *Input: Sistema *s e caracteres;
-*Output: um Usuario;
+*Output: posição usuario;
 */
-Usuario* VerificaUsuarioSistema(Sistema *s,char *login, char *senha);
+int VerificaUsuarioSistema(Sistema *s,char *login, char *senha);
 
 /*Recebe o Sistema por parametro e um idenificador da posição do Album escolhido;
 *Input: Sistema *s e inteiro;
@@ -99,5 +99,17 @@ void PesquisarGenero(Sistema *s, char* nomeG);
 *Output: nenhum;
 */
 void PesquisarProdutora(Sistema *s, char* nomeP);
+
+
+Usuario* RetornaUsuarioSistema(Sistema *s, int posicao);
+
+void AtribuiQtdAlbunsSistema(Sistema *s,int qtd);
+
+int RetornaQtdAlbumSistema(Sistema *s);
+void AtribuiQtdUsuariosSistema(Sistema *s, int qtdU);
+int RetornaQtdUsuariosSistema(Sistema *s);
+
+
+
 
 #endif 

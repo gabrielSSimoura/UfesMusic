@@ -13,7 +13,7 @@ Playlist* AlocaPlaylist();
 *Input: Playlist *p e caracteres;
 *Output: nenhum;
 */
-void CriaPlaylist(Playlist *p, char* nomep, char* colab1, char* colab2, int qtdColab, int qtdMidia);
+void CriaPlaylist(Playlist *p, char* nomep, char* colab1, char* colab2, int qtdColab, int qtdMidia, int tipo);
 
 /*Recebe uma Playlist ja alocada, e seus dados, nome, colaboradores, quantidade de midias atuais, etc;
 *Input: Playlist *p e caracteres;
@@ -69,5 +69,7 @@ void ImprimeMidiasPlaylist(Playlist *p);
 */
 void AtribuiNomePlaylist(Playlist *p, char *nomep);
 
+
+void ImprimePlaylistFavorita(Playlist *playfav);
 
 #endif

@@ -41,7 +41,7 @@ void AdicionaAlbumSistema(Sistema *s, Album *a){
 }
 void AdicionaUsuarioSistema(Sistema *s, Usuario *u){
     s->usuarios[s->qtdUsuario]=u;
-    s->qtdUsuario++;
+    s->qtdUsuario++;    
 }
 
 void ImprimeAlbunsSistema(Sistema *s){
@@ -50,26 +50,30 @@ void ImprimeAlbunsSistema(Sistema *s){
         ImprimeDadosBasicosAlbum(s->albuns[i]);
     }
 }
-void ImprimeUsuarioSistema(Sistema *s){
-    for(int i=0;i<s->qtdUsuario;i++){
-        printf("\t\tUsuario [%02d]\n",i);
-        ImprimeUsuario(s->usuarios[i]);
-    }
+void ImprimeUsuarioSistema(Sistema *s,int id, int verifica){
+   if(verifica==1)ImprimeUsuario(s->usuarios[id]);
+   else if(verifica==0){
+       ImprimeUsuarioPlayPublicoPrivado(s->usuarios[id]);
+   }
 }
 
 int VerificaUsuarioSistema(Sistema *s,char *login, char *senha){
+    char* log=(char*)malloc(50);
+    char* snha=(char*)malloc(50);
   for(int i=0;i<=s->qtdUsuario;i++){
-      if(strcmp(login,RetornaLogin(s->usuarios[i]))){
-          if(strcmp(senha,RetornaSenha(s->usuarios[i]))){
+      log=RetornaLogin(s->usuarios[i]);      
+      if(!(strcmp(login,log))){
+          snha=RetornaSenha(s->usuarios[i]);          
+          if(!(strcmp(senha,snha))){
               printf("\n\t\tLogin bem sucedido!");
               return i;
           }
       }
   }
-  printf("\n\t\tUsuario não encontrado");
+  printf("\n\t\tUsuario nao encontrado");
   return -1;
 }
-Usuario* RetornaUsuarioSistema(Sistema *s, int posicao){
+Usuario* RetornaUsuarioSistema(Sistema *s, int posicao){    
     return s->usuarios[posicao];
 }
 
@@ -134,3 +138,12 @@ void AtribuiQtdUsuariosSistema(Sistema *s, int qtdU){
 int RetornaQtdUsuariosSistema(Sistema *s){
     return s->qtdUsuario;
 }
+void OpcaoPesquisarUsuario(Sistema *s, int idusuario_atual){
+    printf("\n%d",idusuario_atual);
+    for(int i=0,j=0;i<s->qtdUsuario;i++,j++){
+        if(i==idusuario_atual){continue;}
+        printf("\n\t\tUsuario [%02d]: ",j);
+        ImprimeUsuarioDadosBasicos(s->usuarios[i]);
+    }
+}
+

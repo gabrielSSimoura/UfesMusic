@@ -9,7 +9,7 @@
 #include "sistema.h"
 
 struct playlist{
-    int tipo;                //1publica,2privada;
+    int tipo;                //0publica,1privada;
     char *nomePlaylist;    
     char *colaboradores[2];
     int qtdColaboradores;
@@ -59,7 +59,9 @@ void ImprimePlaylist(Playlist *p){
     ImprimeColaboradoresPlaylist(p);
     ImprimeMidiasPlaylist(p);
 }
-
+int RetornaTipo(Playlist *p){
+    return p->tipo;
+}
 
 void ApagaMidiaPlaylist(Playlist *p,int posicao){
     p->midia[51] = p->midia[posicao];

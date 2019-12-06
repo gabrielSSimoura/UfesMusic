@@ -6,7 +6,7 @@
 
 
 void MenuInicial(){
-    system("clear");
+   // system("clear");
     printf("\n\t\tBem Vindo!\t\t\n");
     printf("\t\t|----------Ufes Music----------|\t\t\n");    
     printf("\t\t|[01]------Cria Usuario--------|\t\t\n");     
@@ -20,11 +20,12 @@ void MenuInicial(){
 }
 
 void MenuUsuario(){
-    system("clear");
+   // system("clear");
     printf("\n\t\t|[01]------Cria Playlist--------|\t\t\n");
-    printf("\t\t|[02]-------Pesquisar-----------|\t\t\n");
+    printf("\t\t|[02]----Pesquisar Usuarios-----|\t\t\n");
     printf("\t\t|[03]--Criar Playlist Favorita--|\t\t\n");
-    printf("\t\t|[04]-----Sair do Programa------|\t\t\n");
+    printf("\t\t|[04]--------Ver Conta----------|\t\t\n");
+    printf("\t\t|[05]-----Sair do Programa------|\t\t\n");
     printf("\t\tO que gostaria de fazer ?: ");  
     setbuf(stdin, NULL);  
 }
@@ -42,7 +43,7 @@ void MenuPlaylist (){
 
 
 void MenuDesenvolvedor(){
-    system("clear");
+   // system("clear");
     printf("\n\t\tBem Vindo Desenvolvedor ! O que deseja fazer?\n");
     printf("\t\t|-----------Ufes Music---------|\t\t\n");    
     printf("\t\t|[01]-------Criar Album--------|\t\t\n");

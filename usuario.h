@@ -14,7 +14,7 @@ Usuario* AlocaUsuario();
 *inputs: Usuario *u e os dados do mesmo;
 *outputs: nenhum;
 */
-void CriaUsuario(Usuario* u,char* login,char* senha);
+void CriaUsuario(Usuario* u,char* login,char* senha,int id);
 
 /*Apaga Playlist de um  Usuario ja Alocado
 *inputs: Usuario *u e a posição da playlist;
@@ -70,4 +70,9 @@ Playlist* RetornaPlaylistUsuario(Usuario *u, int idplay);
 */
 void AdicionaPlaylistFavoritaUsuario(Usuario *u,Playlist *p);
 
+void AtribuiIdUsuario(Usuario *u, int id);
+int RetornaIdUsuario(Usuario *u);
+void ImprimeUsuarioDadosBasicos(Usuario *u);
+void AtribuiPlaylistSeguindo(Usuario *u, Playlist *p);
+void ImprimeUsuarioPlayPublicoPrivado(Usuario *u);
 #endif 

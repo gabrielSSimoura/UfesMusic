@@ -35,11 +35,11 @@ void AdicionaUsuarioSistema(Sistema *s, Usuario *u);
 */
 void ImprimeAlbunsSistema(Sistema *s);
 
-/*Recebe o Sistema por parametro e Imprime os usuarios existentes no sistema;
+/*Recebe o Sistema por parametro e Imprime o usuario atual do sistema;
 *Input: Sistema *s;
 *Output: nenhum;
 */
-void ImprimeUsuarioSistema(Sistema *s);
+void ImprimeUsuarioSistema(Sistema *s,int id, int verifica);
 
 /*Recebe o Sistema por parametro e uma senha;
 *Input: Sistema *s e um inteiro;
@@ -108,7 +108,7 @@ void AtribuiQtdAlbunsSistema(Sistema *s,int qtd);
 int RetornaQtdAlbumSistema(Sistema *s);
 void AtribuiQtdUsuariosSistema(Sistema *s, int qtdU);
 int RetornaQtdUsuariosSistema(Sistema *s);
-
+void OpcaoPesquisarUsuario(Sistema *s, int idusuario_atual);
 
 
 

@@ -12,11 +12,12 @@ void LerPrograma();
 void DadosMidia(Midia *m);
 void DadosAlbum(Album *alb);
 void DadosPlaylist(Playlist *play);
-void DadosUsuario(Usuario *usu);
+void DadosUsuario(Usuario * usu, Sistema *s);
 
 void OpcaoCriarPlaylist(Sistema *s,Usuario *usu, int opcao);
 void OpcaoPesquisar(Sistema *s);
 void OpcaoDev(Sistema *s);
+void PequisaUsuario(Sistema *s, Usuario *u);
 
 void AlteraMidia(Midia *m,int escolha);
 void AlteraAlbum(Album *a,int escolha);
@@ -86,15 +87,17 @@ void PreencheAlbum(Album *alb, int qtd){
         AdicionaMidiaAlbum(alb,m);
     }
 }
- void DadosUsuario(Usuario *usu){
+ void DadosUsuario(Usuario *usu, Sistema *s){
     
     char* lgin=(char*)malloc(50);
     char* snha=(char*)malloc(50);
+    int id=0;
     printf("\n\t\tLogin : ");
     lgin=LeDados();
     printf("\t\tSenha: ");
     snha=LeDados();
-    CriaUsuario(usu,lgin,snha);    
+    id=RetornaQtdUsuariosSistema(s);    
+    CriaUsuario(usu,lgin,snha,id);    
 }
 void DadosAlbum(Album *alb){
     
@@ -343,7 +346,7 @@ void PreencheSistemaComUsuario(Sistema *s,Usuario *usu){
 }
 
 void OpcaoCriarPlaylist(Sistema *s,Usuario *usu, int opcao){
-    int favorita=0,id=0;
+    int favorita=0,id=0,idusu=0;
     if(opcao==3){
         favorita=1;
     }
@@ -353,7 +356,9 @@ void OpcaoCriarPlaylist(Sistema *s,Usuario *usu, int opcao){
     Album *albm=AlocaAlbum();
     albm=RetornaAlbumEscolhido(s,id);
     PreencheUsuario(usu,albm,favorita);
-    ImprimeUsuarioSistema(s);
+    idusu=RetornaIdUsuario(usu);
+    printf("\n\t\t%d",idusu);
+    ImprimeUsuarioSistema(s,idusu,1);
                 
     while(1){
         int op1=0,id1=0,opMenuAltera=0,midia=0;
@@ -500,24 +505,52 @@ void OpcaoDev(Sistema *s){
     }
 }
 
+void PequisaUsuario(Sistema *s, Usuario *u){
+    
+    while(1){
+        Playlist *p=AlocaPlaylist();
+        Usuario *u2=AlocaUsuario();
+        int id_opcao=0,s_n=0,idplay=0;
+        OpcaoPesquisarUsuario(s,RetornaIdUsuario(u));
+        printf("\n\t\tDigite o id do Usuario para ver suas Playlists: ");
+        id_opcao=LerInteiros();
+        ImprimeUsuarioSistema(s,id_opcao,0);
+        printf("\n\t\tDeseja Seguir alguma playlist desse usuario, [1]SIM, [0]NAO: ");
+        s_n=LerInteiros();
+        if(s_n==0){
+            printf("\t\tDeseja Sair do menu pesquisar usuario,[1]SIM, [0]NAO: ");
+            s_n=LerInteiros();
+            if(s_n==1){break;}
+            
+        }
+        else if(s_n==1){
+            printf("\n\t\tDigite o id da Playlists que deseja seguir: ");
+            idplay=LerInteiros();
+            u2=RetornaUsuarioSistema(s,id_opcao);
+            p=RetornaPlaylistUsuario(u2,idplay);
+            AtribuiPlaylistSeguindo(u,p);
+            continue;
+        }
+    }
+}
 
 int main(){    
    Sistema *s=AlocaSistema();
 while(1){
-    int escolha=0;
+    int escolha=0,ij;
     MenuInicial();
     escolha=LerInteiros(); 
     if(escolha==1){
         Usuario *usu=AlocaUsuario();
-        DadosUsuario(usu);
-        PreencheSistemaComUsuario(s,usu);    
+        DadosUsuario(usu,s);               
+        PreencheSistemaComUsuario(s,usu);         
         continue;
        }
     else if(escolha==2){ //OPçao Desenvolvedor   
         OpcaoDev(s);
         continue;      
     }
-    else if(escolha==3){//Login
+    if(escolha==3){//Login
         int posi=0;
         char *login=(char*)malloc(50);
         char *senha=(char*)malloc(50);
@@ -529,22 +562,25 @@ while(1){
         posi=VerificaUsuarioSistema(s,login,senha);
         if(posi==-1){continue;}
         else {
-            u=RetornaUsuarioSistema(s,posi);
-             
+            u=RetornaUsuarioSistema(s,posi);  
         while(1){            
             int id=0,opcao=0; 
             MenuUsuario();
+            
             opcao=LerInteiros();
 
             if(opcao==1 || opcao==3){
                 OpcaoCriarPlaylist(s,u,opcao);
                 continue;                
             }
-            else if(opcao==2){//Pesquisar:
-                OpcaoPesquisar(s);
-                continue;
+            else if(opcao==2){//Pesquisar Usuarios
+                PequisaUsuario(s,u);
+                continue;                
             }           
-            else if (opcao==4){break;}
+            else if(opcao==4){
+                ImprimeUsuario(u);
+            }
+            else if (opcao==5){break;}
             else {printf("\n\t\tOpcao Invalida, tente novamente!"); continue;}
         }
         continue;

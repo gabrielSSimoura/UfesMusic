@@ -8,14 +8,17 @@
 #include "playlist.h"
 #include "sistema.h"
 
-struct usuario{   
+struct usuario{  
+    int idusuario; 
     char *login;
     char *senha;
     int qtdplay;    
     Playlist *play[51];
     Playlist *favoritos;
+    Playlist *seguindo[5];
     int favorito;
     int qtdTotalPlaylist;
+    int qtdPseguindo;
     
 };
 
@@ -24,10 +27,14 @@ Usuario* AlocaUsuario(){
     u->login=(char*)malloc(50);
     u->senha=(char*)malloc(50);
     u->qtdTotalPlaylist=50;
+    u->qtdPseguindo=0;
     u->favoritos=AlocaPlaylist();
     for(int i=0;i<51;i++){
         u->play[i]=AlocaPlaylist();
-    }    
+    }   
+    for(int i=0;i<5;i++){
+        u->seguindo[i]=AlocaPlaylist();
+    } 
     return u;
 }
 void AdicionaPlaylistUsuario(Usuario *u, Playlist *p){
@@ -49,13 +56,14 @@ void AdicionaPlaylistFavoritaUsuario(Usuario *u,Playlist *p){
     }
 }
 
-void CriaUsuario(Usuario* u,char* login,char* senha){  
+void CriaUsuario(Usuario* u,char* login,char* senha,int id){  
     strcpy(u->login,login);
     strcpy(u->senha,senha);
     u->qtdplay=0;   
     u->favorito=0;  
     u->qtdTotalPlaylist=50;
-      
+    u->idusuario=id; 
+       
 }
 
 void ApagaPlaylistUsuario(Usuario *u, int posicao){
@@ -79,8 +87,17 @@ void ImprimeUsuario(Usuario *u){
         printf("\n\t\t[%02d] ",i);
         ImprimePlaylist(u->play[i]);
     }
-    printf("\n\t\tFavorita: ");
-    ImprimePlaylist(u->favoritos);
+    if(u->favorito==1){
+        printf("\n\t\tFavorita: ");
+        ImprimePlaylist(u->favoritos);
+    }
+    if(u->qtdPseguindo>0){
+        for(int i=0;i<u->qtdPseguindo;i++){
+        printf("\n\t\tSeguiundo [%02d] ",i);
+        ImprimePlaylist(u->seguindo[i]);
+    }
+
+    }
 }
 void ImprimeLogin(Usuario *u){
     printf("\t\tLogin: %s\n",u->login);
@@ -107,4 +124,37 @@ char* RetornaSenha(Usuario *u){
 
 Playlist* RetornaPlaylistUsuario(Usuario *u, int idplay){
     return u->play[idplay];
+}
+void AtribuiIdUsuario(Usuario *u, int id){
+    u->idusuario=id;
+}
+int RetornaIdUsuario(Usuario *u){    
+    return u->idusuario;
+}
+void ImprimeUsuarioDadosBasicos(Usuario *u){
+    printf("\n");
+    ImprimeLogin(u);
+    ImprimeSenhaEncriptada(u);
+    printf("\n");
+}
+void AtribuiPlaylistSeguindo(Usuario *u, Playlist *p){
+    if(u->qtdPseguindo<=5){
+        u->seguindo[u->qtdPseguindo]=p;
+        u->qtdPseguindo++;
+        printf("\n\t\t Essa playlist esta sendo seguida! :)");
+    }
+    else printf("\n\t\tMaximo de playlist seguindo atingido!");
+}
+void ImprimeUsuarioPlayPublicoPrivado(Usuario *u){
+    int tipo=0;
+    ImprimeUsuarioDadosBasicos(u);
+
+    for(int i=0,j=0;i<u->qtdplay;i++,j++){
+        tipo=RetornaTipo(u->play[i]);
+        if(tipo==1){continue;}
+        else { 
+            printf("\n\t\t Playlist [%02d]: ",j);
+            ImprimePlaylist(u->play[i]);
+        }
+    }    
 }

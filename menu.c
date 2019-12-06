@@ -6,7 +6,7 @@
 
 
 void MenuInicial(){
-   // system("clear");
+    //system("clear");
     printf("\n\t\tBem Vindo!\t\t\n");
     printf("\t\t|----------Ufes Music----------|\t\t\n");    
     printf("\t\t|[01]------Cria Usuario--------|\t\t\n");     
@@ -106,7 +106,8 @@ void MenuAlteraPlaylist(){
     printf("\n\t\tO que deseja Alterar: ");    
     printf("\n\t\t|[01]----Nome da Playlist---|\t\t\n");
     printf("\t\t|[02]------Apagar Midia-----|\t\t\n");      
-    printf("\t\t|[03]------Sair do Menu-----|\t\t\n");
+    printf("\t\t|[03]-Alterar ordem Midias--|\t\t\n");
+    printf("\t\t|[04]------Sair do Menu-----|\t\t\n");
     printf("\t\tDigite uma das Opcoes: "); 
     setbuf(stdin, NULL);  
 

@@ -75,4 +75,5 @@ int RetornaIdUsuario(Usuario *u);
 void ImprimeUsuarioDadosBasicos(Usuario *u);
 void AtribuiPlaylistSeguindo(Usuario *u, Playlist *p);
 void ImprimeUsuarioPlayPublicoPrivado(Usuario *u);
+Usuario *LerUsuarioArquivo(FILE *arquivo);
 #endif 

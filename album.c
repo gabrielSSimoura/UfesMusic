@@ -126,3 +126,26 @@ void PesquisarProdutoraAlbum(Album *a, char* nomeP){
        
     }
 }
+
+Album* LerAlbunsArquivo(FILE *arquivo){
+    Album *a=AlocaAlbum();
+    fscanf(arquivo, "%[^\n]s",a->nomeAlbum);
+    printf("\n%s",a->nomeAlbum);
+    fscanf(arquivo, "\n");
+   
+    fscanf(arquivo, "%[^\n]s",a->nomeArtista); ///Quebrando
+    printf("%d", a->nomeArtista == NULL);
+    printf("\n%s",a->nomeArtista);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%[^\n]s",a->genero);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%[^\n]s",a->produzidoPor);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%d",&a->ano);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%d",&a->qtdMidiasTotal);
+    fscanf(arquivo, "\n");
+    for(int i=0;i<a->qtdMidiasTotal;i++){
+        a->midia[i]=LerMidiaArquivo(arquivo);
+    }
+}

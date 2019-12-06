@@ -168,3 +168,27 @@ void PesquisarProdutoraMidia(Midia *m, char* nomeP){
         ImprimeMidia(m);
     }
 }
+
+Midia* LerMidiaArquivo(FILE *arquivo){
+    Midia *m=AlocaMidia();
+    fscanf(arquivo,"%[^\n]s",m->nomeMidia);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%[^\n]s",m->genero);
+    fscanf(arquivo, "\n");    
+    fscanf(arquivo, "%[^\n]s",m->produzidoPor);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%f",&m->duracao);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%d",&m->qtdArtista);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%d",&m->qtdCompositor);
+    fscanf(arquivo, "\n");
+    for(int i=0;i<m->qtdArtista;i++){
+        fscanf(arquivo, "%[^\n]s",m->nomeArtista[i]);
+        fscanf(arquivo, "\n");
+    }
+    for(int i=0;i<m->qtdCompositor;i++){
+        fscanf(arquivo, "%[^\n]s",m->nomeCompositor[i]);
+        fscanf(arquivo, "\n");
+    }
+}

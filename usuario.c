@@ -158,3 +158,29 @@ void ImprimeUsuarioPlayPublicoPrivado(Usuario *u){
         }
     }    
 }
+
+Usuario *LerUsuarioArquivo(FILE *arquivo){
+    Usuario *u=AlocaUsuario();
+    fscanf(arquivo, "%d",&u->idusuario);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%[^\n]s",u->login);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%[^\n]s",u->senha);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%d",&u->qtdplay);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%d",&u->favorito);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%d",&u->qtdTotalPlaylist);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%d",&u->qtdPseguindo);
+    fscanf(arquivo, "\n");
+    
+    for(int i=0;i<u->qtdplay;i++){
+        u->play[i]=LerPlaylistArquivo(arquivo);
+    }
+    for(int i=0;i<u->qtdPseguindo;i++){
+        u->seguindo[i]=LerPlaylistArquivo(arquivo);
+    }
+    u->favoritos=LerPlaylistArquivo(arquivo);
+}

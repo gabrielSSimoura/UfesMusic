@@ -8,7 +8,7 @@
 #include "playlist.h"
 #include "sistema.h"
 
-void LerPrograma();
+Sistema* LerPrograma();
 void DadosMidia(Midia *m);
 void DadosAlbum(Album *alb);
 void DadosPlaylist(Playlist *play);
@@ -33,23 +33,44 @@ int LerInteiros();
 int VerificaOpcao(int opinicial, int opfinal);
 float LerFloat();
 
-void LerPrograma(){
+Sistema* LerPrograma(){
    Sistema *s=AlocaSistema();
+   Album *a;
+   Usuario *u;
    int qtdAlb=0, qtdUsu=0;
-   
+  
    FILE *arquivo;
-   arquivo=fopen("pragrama.txt", "r");
+   arquivo=fopen("programa.txt", "r");
     if(!arquivo){
         printf("falha na abertura");
         exit (1);
     }
+    
     fscanf(arquivo, "%d", &qtdAlb);
     fscanf(arquivo, "\n");
-    AtribuiQtdUsuariosSistema(s,qtdAlb);
     
-    for (int i= 0;i< qtdAlb; i++){
-        
-    }    
+    fscanf(arquivo, "%d", &qtdUsu);
+     printf("Antes ");
+    fscanf(arquivo, "\n");
+    printf("Passou ");
+    
+    for(int i= 0;i<qtdAlb; i++){
+        printf("\nP1");
+        a=AlocaAlbum();
+        a=LerAlbunsArquivo(arquivo);
+        printf("Passou1");
+        ImprimeAlbum(a);
+         printf("Passou2");
+        //AdicionaAlbumSistema(s,a);
+         printf("Passou3");
+    }
+   /* for(int i=0;i<qtdUsu;i++){
+        u=AlocaUsuario();
+        u=LerUsuarioArquivo(arquivo);
+        ImprimeUsuario(u);
+        AdicionaUsuarioSistema(s,u);
+    }*/    
+    return s;
 }
 
 int VerificaOpcao(int opinicial, int opfinal){
@@ -384,7 +405,7 @@ void OpcaoCriarPlaylist(Sistema *s,Usuario *usu, int opcao){
                 MenuAlteraPlaylist();
                 opMenuAltera=LerInteiros();
                 if(opMenuAltera<1 || opMenuAltera>3){continue;}
-                else if(opMenuAltera==3){opMenuAltera=0;break;}
+                else if(opMenuAltera==4){opMenuAltera=0;break;}
                 else if(opMenuAltera==1){AlteraPlaylist(play,opMenuAltera);break;}
                 else if(opMenuAltera==2){
                     ImprimePlaylist(play);
@@ -392,6 +413,17 @@ void OpcaoCriarPlaylist(Sistema *s,Usuario *usu, int opcao){
                     midia=LerInteiros();
                     ApagaMidiaPlaylist(play,midia);
                     continue;
+                }
+                else if(opMenuAltera==3){//Altera Ordem Das Midias
+                    int p1,p2;
+                    ImprimePlaylist(play);
+                    printf("\n\t\tEscolha a posicao das midias que deseja aterar: ");
+                    p1=LerInteiros();
+                    p2=LerInteiros();
+                    TrocaMidia(play,p1,p2);
+                    ImprimePlaylist(play);
+                    continue;
+
                 }
             }
         }
@@ -536,6 +568,8 @@ void PequisaUsuario(Sistema *s, Usuario *u){
 
 int main(){    
    Sistema *s=AlocaSistema();
+   s=LerPrograma();
+   printf("Leu");
 while(1){
     int escolha=0,ij;
     MenuInicial();

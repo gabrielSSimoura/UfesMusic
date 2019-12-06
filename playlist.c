@@ -49,8 +49,10 @@ int RetornaQtdMidias(Playlist *p){
 }
 
 void AdicionaMidiaPlaylist(Playlist *p, Midia *m){    
-    p->midia[p->qtdMidias]=m;
-    p->qtdMidias++;
+    if(p->qtdMidias<50){
+        p->midia[p->qtdMidias]=m;
+        p->qtdMidias++;
+    }
 }
 
 void ImprimePlaylist(Playlist *p){
@@ -78,6 +80,7 @@ void TrocaMidia(Playlist *p, int posicao1, int posicao2){
     auxiliar=p->midia[posicao1];
     p->midia[posicao1]=p->midia[posicao2];
     p->midia[posicao2]=auxiliar;
+    
 }
 
 void ImprimeNomePlaylist(Playlist *p){
@@ -105,4 +108,23 @@ void ImprimePlaylistFavorita(Playlist *playfav){
     ImprimeNomePlaylist(playfav);
     ImprimeColaboradoresPlaylist(playfav);
     ImprimeMidiasPlaylist(playfav);
+}
+
+Playlist *LerPlaylistArquivo(FILE *arquivo){
+    Playlist *p=AlocaPlaylist();
+    fscanf(arquivo, "%d",&p->tipo);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%[^\n]s",p->nomePlaylist);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%d",&p->qtdColaboradores);
+    fscanf(arquivo, "\n");
+    fscanf(arquivo, "%d",&p->qtdMidias);
+    fscanf(arquivo, "\n");
+    for(int i=0;i<p->qtdColaboradores;i++){
+        fscanf(arquivo, "%[^\n]s",p->colaboradores[i]);
+        fscanf(arquivo, "\n");
+    }
+    for(int i=0;i<p->qtdMidias;i++){
+        p->midia[i]=LerMidiaArquivo(arquivo);
+    }
 }

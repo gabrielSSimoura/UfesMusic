@@ -110,4 +110,5 @@ int RetornaQtdArtista(Midia *m);
 *outputs: inteiro;
 */
 int RetornaQtdCompositor(Midia *m);
+Midia* LerMidiaArquivo(FILE *arquivo);
 #endif

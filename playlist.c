@@ -88,13 +88,13 @@ void ImprimeNomePlaylist(Playlist *p){
     }    
 void ImprimeColaboradoresPlaylist(Playlist *p){
     for(int i=0;i<p->qtdColaboradores;i++){
-        printf("\t\t[%02d]",i);
+        printf("\t\tColaborador [%02d]: ",i);
         printf(" %s\n",p->colaboradores[i]);
         }
     }  
 void ImprimeMidiasPlaylist(Playlist *p){
     for(int i=0;i<p->qtdMidias;i++){
-        printf("\t\t[%02d]",i);
+        printf("\n\t\tMidia [%02d]:",i);
         ImprimeMidia(p->midia[i]);
         }
     }  
@@ -127,4 +127,29 @@ Playlist *LerPlaylistArquivo(FILE *arquivo){
     for(int i=0;i<p->qtdMidias;i++){
         p->midia[i]=LerMidiaArquivo(arquivo);
     }
+    return p;
+}
+
+void SalvaPlaylist(Playlist *p, FILE *arquivo){
+    fprintf(arquivo, "%d",p->tipo);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%s",p->nomePlaylist);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%d",p->qtdColaboradores);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%d",p->qtdMidias);
+    fprintf(arquivo, "\n");
+    for(int i=0;i<p->qtdColaboradores;i++){
+        fprintf(arquivo, "%s",p->colaboradores[i]);
+        fprintf(arquivo, "\n");
+    }
+    for(int i=0;i<p->qtdMidias;i++){
+       SalvaMidia(p->midia[i],arquivo);
+    }
+
+
+
+
+
+
 }

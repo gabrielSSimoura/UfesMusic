@@ -81,10 +81,11 @@ void TrocaPlaylist(Usuario *u, int posicao1, int posicao2){
 }
 
 void ImprimeUsuario(Usuario *u){
+    printf("\n");
     ImprimeLogin(u);
     ImprimeSenhaEncriptada(u);
     for(int i=0;i<u->qtdplay;i++){
-        printf("\n\t\t[%02d] ",i);
+        printf("\n\t\tPlaylist [%02d]: ",i);
         ImprimePlaylist(u->play[i]);
     }
     if(u->favorito==1){
@@ -93,11 +94,12 @@ void ImprimeUsuario(Usuario *u){
     }
     if(u->qtdPseguindo>0){
         for(int i=0;i<u->qtdPseguindo;i++){
-        printf("\n\t\tSeguiundo [%02d] ",i);
+        printf("\n\t\tSeguindo [%02d]: ",i);
         ImprimePlaylist(u->seguindo[i]);
-    }
+        }
 
     }
+    printf("\n");
 }
 void ImprimeLogin(Usuario *u){
     printf("\t\tLogin: %s\n",u->login);
@@ -161,6 +163,7 @@ void ImprimeUsuarioPlayPublicoPrivado(Usuario *u){
 
 Usuario *LerUsuarioArquivo(FILE *arquivo){
     Usuario *u=AlocaUsuario();
+    u->qtdTotalPlaylist=50;
     fscanf(arquivo, "%d",&u->idusuario);
     fscanf(arquivo, "\n");
     fscanf(arquivo, "%[^\n]s",u->login);
@@ -170,9 +173,7 @@ Usuario *LerUsuarioArquivo(FILE *arquivo){
     fscanf(arquivo, "%d",&u->qtdplay);
     fscanf(arquivo, "\n");
     fscanf(arquivo, "%d",&u->favorito);
-    fscanf(arquivo, "\n");
-    fscanf(arquivo, "%d",&u->qtdTotalPlaylist);
-    fscanf(arquivo, "\n");
+    fscanf(arquivo, "\n");    
     fscanf(arquivo, "%d",&u->qtdPseguindo);
     fscanf(arquivo, "\n");
     
@@ -182,5 +183,33 @@ Usuario *LerUsuarioArquivo(FILE *arquivo){
     for(int i=0;i<u->qtdPseguindo;i++){
         u->seguindo[i]=LerPlaylistArquivo(arquivo);
     }
-    u->favoritos=LerPlaylistArquivo(arquivo);
+    if(u->favorito==1){
+        u->favoritos=LerPlaylistArquivo(arquivo);
+    }
+    return u;
+}
+
+void SalvaUsuario(Usuario *u, FILE *arquivo){
+    fprintf(arquivo, "%d",u->idusuario);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%s",u->login);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%s",u->senha);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%d",u->qtdplay);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%d",u->favorito);
+    fprintf(arquivo, "\n");    
+    fprintf(arquivo, "%d",u->qtdPseguindo);
+    fprintf(arquivo, "\n");
+    
+    for(int i=0;i<u->qtdplay;i++){
+       SalvaPlaylist( u->play[i],arquivo);
+    }
+    for(int i=0;i<u->qtdPseguindo;i++){
+       SalvaPlaylist( u->play[i],arquivo);
+    }
+    if(u->favorito==1){
+        SalvaPlaylist( u->favoritos,arquivo);
+    }
 }

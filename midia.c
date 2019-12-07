@@ -171,6 +171,8 @@ void PesquisarProdutoraMidia(Midia *m, char* nomeP){
 
 Midia* LerMidiaArquivo(FILE *arquivo){
     Midia *m=AlocaMidia();
+    fscanf(arquivo, "%d",&m->tipo);
+    fscanf(arquivo, "\n");
     fscanf(arquivo,"%[^\n]s",m->nomeMidia);
     fscanf(arquivo, "\n");
     fscanf(arquivo, "%[^\n]s",m->genero);
@@ -184,11 +186,37 @@ Midia* LerMidiaArquivo(FILE *arquivo){
     fscanf(arquivo, "%d",&m->qtdCompositor);
     fscanf(arquivo, "\n");
     for(int i=0;i<m->qtdArtista;i++){
-        fscanf(arquivo, "%[^\n]s",m->nomeArtista[i]);
+        fscanf(arquivo, "%[^\n]s",m->nomeArtista[i]);       
         fscanf(arquivo, "\n");
     }
     for(int i=0;i<m->qtdCompositor;i++){
-        fscanf(arquivo, "%[^\n]s",m->nomeCompositor[i]);
+        fscanf(arquivo, "%[^\n]s",m->nomeCompositor[i]);       
         fscanf(arquivo, "\n");
+    }
+    return m;
+}
+
+void SalvaMidia(Midia *m, FILE *arquivo){
+    fprintf(arquivo, "%d",m->tipo);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo,"%s",m->nomeMidia);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%s",m->genero);
+    fprintf(arquivo, "\n");    
+    fprintf(arquivo, "%s",m->produzidoPor);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%.2f",m->duracao);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%d",m->qtdArtista);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%d",m->qtdCompositor);
+    fprintf(arquivo, "\n");
+    for(int i=0;i<m->qtdArtista;i++){
+        fprintf(arquivo, "%s",m->nomeArtista[i]);       
+        fprintf(arquivo, "\n");
+    }
+    for(int i=0;i<m->qtdCompositor;i++){
+        fprintf(arquivo, "%s",m->nomeCompositor[i]);       
+        fprintf(arquivo, "\n");
     }
 }

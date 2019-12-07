@@ -29,9 +29,7 @@ Sistema* AlocaSistema(){
     s->senhaDev=130511;
 }
 
-int RetornaQtdAlbum(Sistema *s){
-    return s->qtdAlbuns;
-}
+
 int RetornaQtdUsuario(Sistema *s){
     return s->qtdUsuario;
 }
@@ -139,7 +137,7 @@ int RetornaQtdUsuariosSistema(Sistema *s){
     return s->qtdUsuario;
 }
 void OpcaoPesquisarUsuario(Sistema *s, int idusuario_atual){
-    printf("\n%d",idusuario_atual);
+    
     for(int i=0,j=0;i<s->qtdUsuario;i++,j++){
         if(i==idusuario_atual){continue;}
         printf("\n\t\tUsuario [%02d]: ",j);

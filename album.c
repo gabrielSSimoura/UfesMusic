@@ -44,7 +44,7 @@ Album* AlocaAlbum(){
 }
 void ImprimeAlbum(Album *a){
     
-    ImprimeNomeAlbum(a);
+    ImprimeNomeAlbum(a);   
     ImprimeArtistaAlbum(a);
     ImprimeGeneroAlbum(a);
     ImprimeProdutoraAlbum(a);
@@ -129,13 +129,10 @@ void PesquisarProdutoraAlbum(Album *a, char* nomeP){
 
 Album* LerAlbunsArquivo(FILE *arquivo){
     Album *a=AlocaAlbum();
-    fscanf(arquivo, "%[^\n]s",a->nomeAlbum);
-    printf("\n%s",a->nomeAlbum);
-    fscanf(arquivo, "\n");
-   
-    fscanf(arquivo, "%[^\n]s",a->nomeArtista); ///Quebrando
-    printf("%d", a->nomeArtista == NULL);
-    printf("\n%s",a->nomeArtista);
+    a->qtdMidiasTotal=20;
+    fscanf(arquivo, "%[^\n]s",a->nomeAlbum);    
+    fscanf(arquivo, "\n");   
+    fscanf(arquivo, "%[^\n]s",a->nomeArtista);    
     fscanf(arquivo, "\n");
     fscanf(arquivo, "%[^\n]s",a->genero);
     fscanf(arquivo, "\n");
@@ -143,9 +140,29 @@ Album* LerAlbunsArquivo(FILE *arquivo){
     fscanf(arquivo, "\n");
     fscanf(arquivo, "%d",&a->ano);
     fscanf(arquivo, "\n");
-    fscanf(arquivo, "%d",&a->qtdMidiasTotal);
+    fscanf(arquivo, "%d",&a->qtdMidias);
     fscanf(arquivo, "\n");
-    for(int i=0;i<a->qtdMidiasTotal;i++){
-        a->midia[i]=LerMidiaArquivo(arquivo);
+    for(int i=0;i<a->qtdMidias;i++){
+        a->midia[i]=LerMidiaArquivo(arquivo);        
+    }
+    return a;
+}
+
+void SalvaAlbum(Album *a, FILE *arquivo){
+
+    fprintf(arquivo, "%s",a->nomeAlbum);        
+    fprintf(arquivo, "\n");   
+    fprintf(arquivo, "%s",a->nomeArtista);    
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%s",a->genero);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%s",a->produzidoPor);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%d",a->ano);
+    fprintf(arquivo, "\n");
+    fprintf(arquivo, "%d",a->qtdMidias);
+    fprintf(arquivo, "\n");
+    for(int i=0;i<a->qtdMidias;i++){
+        SalvaMidia(a->midia[i],arquivo);        
     }
 }

@@ -9,9 +9,10 @@
 #include "sistema.h"
 
 Sistema* LerPrograma();
+void SalvaPrograma(Sistema *s);
 void DadosMidia(Midia *m);
 void DadosAlbum(Album *alb);
-void DadosPlaylist(Playlist *play);
+void DadosPlaylist(Playlist *play,Sistema *s,int id);
 void DadosUsuario(Usuario * usu, Sistema *s);
 
 void OpcaoCriarPlaylist(Sistema *s,Usuario *usu, int opcao);
@@ -47,32 +48,54 @@ Sistema* LerPrograma(){
     }
     
     fscanf(arquivo, "%d", &qtdAlb);
+    fscanf(arquivo, "\n");    
+    fscanf(arquivo, "%d", &qtdUsu);     
     fscanf(arquivo, "\n");
     
-    fscanf(arquivo, "%d", &qtdUsu);
-     printf("Antes ");
-    fscanf(arquivo, "\n");
-    printf("Passou ");
     
-    for(int i= 0;i<qtdAlb; i++){
-        printf("\nP1");
+    for(int i= 0;i<qtdAlb; i++){        
         a=AlocaAlbum();
-        a=LerAlbunsArquivo(arquivo);
-        printf("Passou1");
-        ImprimeAlbum(a);
-         printf("Passou2");
-        //AdicionaAlbumSistema(s,a);
-         printf("Passou3");
+        a=LerAlbunsArquivo(arquivo);             
+        AdicionaAlbumSistema(s,a);
     }
-   /* for(int i=0;i<qtdUsu;i++){
+    for(int i=0;i<qtdUsu;i++){
         u=AlocaUsuario();
-        u=LerUsuarioArquivo(arquivo);
-        ImprimeUsuario(u);
+        u=LerUsuarioArquivo(arquivo);        
         AdicionaUsuarioSistema(s,u);
-    }*/    
+    }  
+    fclose(arquivo);
     return s;
 }
 
+void SalvaPrograma(Sistema *s){
+    int qtdAlb, qtdUsu;
+    FILE *arquivo;
+    Album *a;
+    Usuario *u;
+   arquivo=fopen("programa.txt", "w");
+    if(!arquivo){
+        printf("falha na abertura");
+        exit (1);
+    }
+    qtdAlb=RetornaQtdAlbumSistema(s);
+    qtdUsu=RetornaQtdUsuariosSistema(s);
+    fprintf(arquivo, "%d", qtdAlb);
+    fprintf(arquivo, "\n");    
+    fprintf(arquivo, "%d", qtdUsu);     
+    fprintf(arquivo, "\n");
+
+    for(int i= 0;i<qtdAlb; i++){
+        a=AlocaAlbum();
+        a=RetornaAlbumEscolhido(s,i);
+        SalvaAlbum(a,arquivo); 
+    }
+    for(int i=0;i<qtdUsu;i++){
+        u=AlocaUsuario();
+        u=RetornaUsuarioSistema(s,i);      
+        SalvaUsuario(u,arquivo);
+    }  
+    fclose(arquivo);
+}
 int VerificaOpcao(int opinicial, int opfinal){
     int num=0;
     num=LerInteiros();
@@ -193,32 +216,45 @@ void DadosMidia(Midia *m){
 
     CriaMidia(m, nome, nomeArtista, nomeArtista2, nomeCompositor, nomeCompositor2,genero, produtora, tipo,duracao, qtdA,qtdC);
 }
-void DadosPlaylist(Playlist *play){
-    
+void DadosPlaylist(Playlist *play,Sistema *s,int id){
+    Usuario *u=AlocaUsuario();
+    Usuario *u2=AlocaUsuario();
     char *nomep=(char*)malloc(50);
     char *nomeColab1=(char*)malloc(50);
     char *nomeColab2=(char*)malloc(50);
-    int qtdColab=0, qtdMidia=0, tipo=0;
+    int qtdColab=0, qtdMidia=0, tipo=0, colab1=0, colab2=0;
 
     printf("\n\t\tNome da Playlist: ");
     nomep=LeDados();
     printf("\t\tQuantidade de colaboradores (MAX 2): ");
     qtdColab=LerInteiros();
+    OpcaoPesquisarUsuario(s,id);    
     if(qtdColab==1){
-        printf("\t\tColaborador [00]: ");
-        nomeColab1=LeDados();
+        printf("\n\t\tId do Colaborador [00]: ");
+        colab1=LerInteiros();
+        u=RetornaUsuarioSistema(s,colab1);
+        nomeColab1=RetornaLogin(u);
     }
     else if(qtdColab==2){
-         printf("\t\tColaborador [00]: ");
-        nomeColab1=LeDados();
-         printf("\t\tColaborador [01]: ");
-        nomeColab2=LeDados();
+         printf("\t\tId do Colaborador [00]: ");
+        colab1=LerInteiros();
+        u=RetornaUsuarioSistema(s,colab1);
+        nomeColab1=RetornaLogin(u);
+         printf("\t\tId do Colaborador [01]: ");        
+         u2=RetornaUsuarioSistema(s,colab2);
+         nomeColab2=RetornaLogin(u2);
+        colab2=LerInteiros();
     }
 
     printf("\t\tSera :Publica(0) ou Privada(1): ");
     tipo=LerInteiros();
     CriaPlaylist(play,nomep,nomeColab1, nomeColab2, qtdColab, qtdMidia, tipo);
-   
+    if(qtdColab==1){
+        AdicionaPlaylistUsuario(u,play);
+    }else if(qtdColab==2){
+        AdicionaPlaylistUsuario(u,play);
+        AdicionaPlaylistUsuario(u2,play);
+    }
 }
 void AlteraMidia(Midia *m,int escolha){
     char *nome=(char*)malloc(50);
@@ -343,11 +379,12 @@ void PreenchePlaylist(Playlist* p, Album *a){
     m=RetornaMidiaAlbum(a,num);
     AdicionaMidiaPlaylist(p,m);
 }
-void PreencheUsuario(Usuario *u,Album *a, int favorita){
-    int qtd;
+void PreencheUsuario(Usuario *u,Album *a, int favorita,Sistema *s){
+    int qtd,id;
     Playlist *play=AlocaPlaylist();
-    DadosPlaylist(play);
-    printf("\t\t\nQuantas midias desse album deseja adicionar em sua Playlist? (MAX 50) : ");
+    id=RetornaIdUsuario(u);
+    DadosPlaylist(play,s,id);
+    printf("\n\t\tQuantas midias deseja adicionar em sua Playlist? (MAX 50): ");
     qtd=LerInteiros();    
 
     for(int i=0;i<qtd;i++){
@@ -376,7 +413,7 @@ void OpcaoCriarPlaylist(Sistema *s,Usuario *usu, int opcao){
     id=LerInteiros();
     Album *albm=AlocaAlbum();
     albm=RetornaAlbumEscolhido(s,id);
-    PreencheUsuario(usu,albm,favorita);
+    PreencheUsuario(usu,albm,favorita,s);
     idusu=RetornaIdUsuario(usu);
     printf("\n\t\t%d",idusu);
     ImprimeUsuarioSistema(s,idusu,1);
@@ -569,7 +606,7 @@ void PequisaUsuario(Sistema *s, Usuario *u){
 int main(){    
    Sistema *s=AlocaSistema();
    s=LerPrograma();
-   printf("Leu");
+   
 while(1){
     int escolha=0,ij;
     MenuInicial();
@@ -621,9 +658,12 @@ while(1){
     
         }
     }    
-    else if(escolha==4){return 0;}
+    else if(escolha==4){break;}
     else {printf("\n\t\tOpcao Invalida! Tente Novamente.");continue;}
     }     
+
+
+SalvaPrograma(s);       
 return 0;
 }
 

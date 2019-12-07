@@ -76,4 +76,5 @@ void ImprimeUsuarioDadosBasicos(Usuario *u);
 void AtribuiPlaylistSeguindo(Usuario *u, Playlist *p);
 void ImprimeUsuarioPlayPublicoPrivado(Usuario *u);
 Usuario *LerUsuarioArquivo(FILE *arquivo);
+void SalvaUsuario(Usuario *u, FILE *arquivo);
 #endif 

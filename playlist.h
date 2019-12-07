@@ -73,4 +73,5 @@ void AtribuiNomePlaylist(Playlist *p, char *nomep);
 void ImprimePlaylistFavorita(Playlist *playfav);
 int RetornaTipo(Playlist *p);
 Playlist *LerPlaylistArquivo(FILE *arquivo);
+void SalvaPlaylist(Playlist *p, FILE *arquivo);
 #endif

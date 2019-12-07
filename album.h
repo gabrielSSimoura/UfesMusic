@@ -151,4 +151,5 @@ void PesquisarProdutoraAlbum(Album *a, char* nomeP);
 */
 Midia* RetornaMidiaAlbum(Album *a, int posicao);
 Album* LerAlbunsArquivo(FILE *arquivo);
+void SalvaAlbum(Album *a, FILE *arquivo);
 #endif

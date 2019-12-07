@@ -11,11 +11,6 @@ typedef struct sistema Sistema;
 */
 Sistema* AlocaSistema();
 
-/*Recebe o Sistema por parametro e retorna a quantidade de albuns existentes;
-*Input: Sistema *s;
-*Output: inteiro com a qauntidade de albuns do sistema;
-*/
-int RetornaQtdAlbum(Sistema *s);
 
 /*Recebe o Sistema por parametro e adiciona um album ao sistema;
 *Input: Sistema *s e Album *a;

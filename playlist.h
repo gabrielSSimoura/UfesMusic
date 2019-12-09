@@ -69,9 +69,28 @@ void ImprimeMidiasPlaylist(Playlist *p);
 */
 void AtribuiNomePlaylist(Playlist *p, char *nomep);
 
-
+/*Recebe uma Playlist ja alocada e Imprime-a;
+*Input: Playlist *playfav;
+*Output: nenhum;
+*/
 void ImprimePlaylistFavorita(Playlist *playfav);
+
+/*Recebe uma Playlist ja alocada e Imprime o tipo;
+*Input: Playlist *p;
+*Output: inteiro;
+*/
 int RetornaTipo(Playlist *p);
+
+
+/*Realiza a Leitura do arquivo, lendo os dados da playlist no arquivo
+*inputs: Arquivo;
+*outputs: Playlist;
+*/
 Playlist *LerPlaylistArquivo(FILE *arquivo);
+
+/*Realiza a escrita do arquivo, escrevendo os dados  da playlist no arquivo
+*inputs:Playlist e Arquivo;
+*outputs: nenhum;
+*/
 void SalvaPlaylist(Playlist *p, FILE *arquivo);
 #endif

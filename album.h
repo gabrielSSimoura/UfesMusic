@@ -150,6 +150,16 @@ void PesquisarProdutoraAlbum(Album *a, char* nomeP);
 *outputs: nenhum;
 */
 Midia* RetornaMidiaAlbum(Album *a, int posicao);
+
+/*Realiza a Leitura do arquivo, lendo os dados dos albuns no arquivo
+*inputs: Arquivo;
+*outputs: Album;
+*/
 Album* LerAlbunsArquivo(FILE *arquivo);
+
+/*Realiza a escrita do arquivo, escrevendo os dados dos albuns no arquivo
+*inputs:Album e Arquivo;
+*outputs: nenhum;
+*/
 void SalvaAlbum(Album *a, FILE *arquivo);
 #endif

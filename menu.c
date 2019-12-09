@@ -12,7 +12,8 @@ void MenuInicial(){
     printf("\t\t|[01]------Cria Usuario--------|\t\t\n");     
     printf("\t\t|[02]--Opcao de Desenvolvedor--|\t\t\n"); 
     printf("\t\t|[03]----------Login-----------|\t\t\n");
-    printf("\t\t|[04]-----Sair do Programa-----|\t\t\n\n"); 
+    printf("\t\t|[04]--------Pesquisar---------|\t\t\n"); 
+    printf("\t\t|[05]-----Sair do Programa-----|\t\t\n\n"); 
 
     printf("\t\tDigite uma das Opcoes: ");
     setbuf(stdin, NULL); 
@@ -25,7 +26,8 @@ void MenuUsuario(){
     printf("\t\t|[02]----Pesquisar Usuarios-----|\t\t\n");
     printf("\t\t|[03]--Criar Playlist Favorita--|\t\t\n");
     printf("\t\t|[04]--------Ver Conta----------|\t\t\n");
-    printf("\t\t|[05]-----Sair do Programa------|\t\t\n");
+    printf("\t\t|[05]-----Editar Playlist-------|\t\t\n");
+    printf("\t\t|[06]-----Sair do Programa------|\t\t\n");
     printf("\t\tO que gostaria de fazer ?: ");  
     setbuf(stdin, NULL);  
 }
@@ -107,7 +109,8 @@ void MenuAlteraPlaylist(){
     printf("\n\t\t|[01]----Nome da Playlist---|\t\t\n");
     printf("\t\t|[02]------Apagar Midia-----|\t\t\n");      
     printf("\t\t|[03]-Alterar ordem Midias--|\t\t\n");
-    printf("\t\t|[04]------Sair do Menu-----|\t\t\n");
+    printf("\t\t|[04]----Adicionar Midia----|\t\t\n");
+    printf("\t\t|[05]------Sair do Menu-----|\t\t\n");
     printf("\t\tDigite uma das Opcoes: "); 
     setbuf(stdin, NULL);  
 

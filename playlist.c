@@ -9,7 +9,7 @@
 #include "sistema.h"
 
 struct playlist{
-    int tipo;                //0publica,1privada;
+    int tipo;                // (0)--> publica e (1)--> privada;
     char *nomePlaylist;    
     char *colaboradores[2];
     int qtdColaboradores;
@@ -52,7 +52,9 @@ void AdicionaMidiaPlaylist(Playlist *p, Midia *m){
     if(p->qtdMidias<50){
         p->midia[p->qtdMidias]=m;
         p->qtdMidias++;
+        printf("\n\t\tMidia adicionada!");
     }
+    else printf("\n\t\tPlaylist cheia!");
 }
 
 void ImprimePlaylist(Playlist *p){
@@ -146,10 +148,4 @@ void SalvaPlaylist(Playlist *p, FILE *arquivo){
     for(int i=0;i<p->qtdMidias;i++){
        SalvaMidia(p->midia[i],arquivo);
     }
-
-
-
-
-
-
 }

@@ -110,6 +110,16 @@ int RetornaQtdArtista(Midia *m);
 *outputs: inteiro;
 */
 int RetornaQtdCompositor(Midia *m);
+
+/*Realiza a Leitura do arquivo, lendo os dados da midia no arquivo
+*inputs: Arquivo;
+*outputs: Midia;
+*/
 Midia* LerMidiaArquivo(FILE *arquivo);
+
+/*Realiza a escrita do arquivo, escrevendo os dados  da midia no arquivo
+*inputs:Midia e Arquivo;
+*outputs: nenhum;
+*/
 void SalvaMidia(Midia *m, FILE *arquivo);
 #endif

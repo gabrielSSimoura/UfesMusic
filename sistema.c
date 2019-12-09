@@ -10,7 +10,7 @@
 
 struct sistema{
     Album *albuns[11];
-    Usuario *usuarios[5];
+    Usuario *usuarios[11];
     int qtdUsuario;
     int qtdAlbuns;
     int senhaDev;
@@ -21,7 +21,7 @@ Sistema* AlocaSistema(){
     for(int i=0;i<11;i++){
         s->albuns[i]=AlocaAlbum();
     }
-    for(int i=0;i<5;i++){
+    for(int i=0;i<11;i++){
         s->usuarios[i]=AlocaUsuario();
     }
     s->qtdAlbuns=0;

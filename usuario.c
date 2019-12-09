@@ -9,17 +9,16 @@
 #include "sistema.h"
 
 struct usuario{  
-    int idusuario; 
+    int idusuario;
+    int favorito;
+    int qtdTotalPlaylist;
+    int qtdplay;   
+    int qtdPseguindo;
     char *login;
-    char *senha;
-    int qtdplay;    
+    char *senha;     
     Playlist *play[51];
     Playlist *favoritos;
     Playlist *seguindo[5];
-    int favorito;
-    int qtdTotalPlaylist;
-    int qtdPseguindo;
-    
 };
 
 Usuario* AlocaUsuario(){

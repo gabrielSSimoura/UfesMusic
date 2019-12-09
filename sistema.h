@@ -95,14 +95,40 @@ void PesquisarGenero(Sistema *s, char* nomeG);
 */
 void PesquisarProdutora(Sistema *s, char* nomeP);
 
-
+/*Recebe o Sistema por parametro e um identificador da posição do Usuario escolhida;
+*Input: Sistema *s e inteiro;
+*Output Usuario;
+*/
 Usuario* RetornaUsuarioSistema(Sistema *s, int posicao);
 
+/*Recebe o Sistema por parametro e um inteiro da qtd de albuns;
+*Input: Sistema *s e inteiro;
+*Output nenhum;
+*/
 void AtribuiQtdAlbunsSistema(Sistema *s,int qtd);
 
+/*Recebe o Sistema por parametro;
+*Input: Sistema *s;
+*Output inteiro;
+*/
 int RetornaQtdAlbumSistema(Sistema *s);
+
+/*Recebe o Sistema por parametro e um inteiro da qtd de Usuarios;
+*Input: Sistema *s e inteiro;
+*Output nenhum;
+*/
 void AtribuiQtdUsuariosSistema(Sistema *s, int qtdU);
+
+/*Recebe o Sistema por parametro;
+*Input: Sistema *s;
+*Output inteiro;
+*/
 int RetornaQtdUsuariosSistema(Sistema *s);
+
+/*Recebe o Sistema por parametro e um inteiro da identificaçao do Usuario atual;
+*Input: Sistema *s e inteiro;
+*Output imprime todos os usuarios existentes exceto o que esta pesquisando;
+*/
 void OpcaoPesquisarUsuario(Sistema *s, int idusuario_atual);
 
 

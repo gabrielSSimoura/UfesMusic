@@ -34,6 +34,11 @@ void AdicionaPlaylistUsuario(Usuario *u, Playlist *p);
 */
 void TrocaPlaylist(Usuario *u, int posicao1, int posicao2);
 
+/*Troca a posição da Playlist Seguindo de um  Usuario ja Alocado
+*inputs: Usuario *u e posições selecionadas;
+*outputs: nenhum;
+*/
+void TrocaPlaylistSeguindo(Usuario *u, int posicao1, int posicao2);
 
 void ImprimeUsuario(Usuario *u);            //| --> Imput: Usuario *u; Output: nennhum;
 void ImprimeLogin(Usuario *u);              //| --> Imprime dados do usuario, login. usuario e senha;
@@ -99,6 +104,14 @@ void AtribuiPlaylistSeguindo(Usuario *u, Playlist *p);
 *Output nenhum;
 */
 void ImprimeUsuarioPlayPublicoPrivado(Usuario *u);
+
+
+
+/*Recebe o Usuario e o id da playlist que quer deixar de seguir
+*Input: Usuario *u e inteiro;
+*Output nenhum;
+*/
+void DeixadeSeguirPlaylist(Usuario *u,int idplay);
 
 /*Realiza a leitura do arquivo, lendo os dados do usuario no arquivo
 *inputs:Usuario;

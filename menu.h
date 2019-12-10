@@ -34,4 +34,8 @@ void MenuAlteraMidia();
 */
 void MenuAlteraPlaylist();
 
+/*Imprime Menu que altera Playlist Seguindo;
+*/
+void MenuAlteraPlaylistSeguindo();
+
 #endif 

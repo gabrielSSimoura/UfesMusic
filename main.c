@@ -528,8 +528,8 @@ void EditaPlaylist(Sistema *s,Usuario *usu){
                 midia=0;
                 MenuAlteraPlaylist();
                 opMenuAltera=LerInteiros();
-                if(opMenuAltera<1 || opMenuAltera>5){continue;}
-                else if(opMenuAltera==5){opMenuAltera=0;break;}
+                if(opMenuAltera<1 || opMenuAltera>6){continue;}
+                else if(opMenuAltera==6){opMenuAltera=0;break;}
                 else if(opMenuAltera==1){AlteraPlaylist(play,opMenuAltera);break;}
                 else if(opMenuAltera==2){
                     ImprimePlaylist(play);
@@ -562,6 +562,14 @@ void EditaPlaylist(Sistema *s,Usuario *usu){
                         m=RetornaMidiaAlbum(albm,idp);
                         AdicionaMidiaPlaylist(play,m);
                         continue;
+                }
+                else if(opMenuAltera==5){//MenuPlaylistSeguindo
+                int ops;
+                        
+                        MenuAlteraPlaylistSeguindo();
+                        ops=LeInteiro();
+                        if(op<1 || op>)
+
                 }
             }
         }

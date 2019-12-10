@@ -29,7 +29,6 @@ Sistema* AlocaSistema(){
     s->senhaDev=130511;
 }
 
-
 int RetornaQtdUsuario(Sistema *s){
     return s->qtdUsuario;
 }
@@ -87,7 +86,6 @@ Album* RetornaAlbumEscolhido(Sistema *s, int identificador){
 Midia* RetornaMidia(Sistema *s, int idAlbum, int idMidia){
     return RetornaMidiaAlbum(s->albuns[idAlbum], idMidia);
 }
-
 
 void PequisarNomeAlbum(Sistema *s, char* nomeAlb){
     for(int i=0;i<s->qtdAlbuns;i++){

@@ -72,6 +72,20 @@ void ApagaPlaylistUsuario(Usuario *u, int posicao){
     u->qtdplay--;
 }
 
+void DeixadeSeguirPlaylist(Usuario *u,int idplay){
+    for(int i=idplay;i<u->qtdPseguindo;i++){
+        TrocaPlaylistSeguindo(u,i,(i+1));
+    }
+    u->qtdPseguindo++;
+}
+
+void TrocaPlaylistSeguindo(Usuario *u, int posicao1, int posicao2){
+    Playlist *auxiliar=AlocaPlaylist();
+    auxiliar=u->seguindo[posicao1];
+    u->seguindo[posicao1]=u->seguindo[posicao2];
+    u->seguindo[posicao2]=auxiliar;
+}
+
 void TrocaPlaylist(Usuario *u, int posicao1, int posicao2){
     Playlist *auxiliar=AlocaPlaylist();
     auxiliar=u->play[posicao1];

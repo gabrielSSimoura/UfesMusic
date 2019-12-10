@@ -82,9 +82,9 @@ void ImprimeNomeCompositor1(Midia *m);              // |            -Nome; -Comp
 void ImprimeNomeArtista2(Midia *m);                 // |        --> Imprime as midias encontradas;
 void ImprimeNomeCompositor2(Midia *m);              // |
 void ImprimeGenero(Midia *m);                       // |
-void ImprimeDuracao(Midia *m);                     //  |
-void ImprimeTipo(Midia *m);                        //  |
-void ImprimeProdutora(Midia *m);                   //  |
+void ImprimeDuracao(Midia *m);                      // |
+void ImprimeTipo(Midia *m);                         // |
+void ImprimeProdutora(Midia *m);                    // |
 
 
 void PesquisaMidia(Midia *m, char* nome);                   //|

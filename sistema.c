@@ -143,3 +143,26 @@ void OpcaoPesquisarUsuario(Sistema *s, int idusuario_atual){
     }
 }
 
+void ApagaPlayColaborador(Sistema *s, char *login, char *nomeplay){
+    Usuario *u=AlocaUsuario();
+    char* log=(char*)malloc(50);
+    for(int i=0;i<s->qtdUsuario;i++){
+        log=RetornaLogin(s->usuarios[i]);      
+        if(!(strcmp(login,log))){
+            u=RetornaUsuarioSistema(s,i);
+            IdentificaPlaylist(u,nomeplay);
+            break;
+        }
+    }
+}
+
+
+void ApagaPlaySeguindoUsuariosSistema(Sistema *s,char *nomeplay){
+    Usuario *u;
+    char* nome=(char*)malloc(50);
+    for(int i=0;i<s->qtdUsuario;i++){
+        u=AlocaUsuario();
+        u=RetornaUsuarioSistema(s,i);
+        IdentificaPlaylistSeguindo(u,nomeplay);
+    }
+}

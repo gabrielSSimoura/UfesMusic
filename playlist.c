@@ -11,7 +11,7 @@
 struct playlist{
     int tipo;                // (0)--> publica e (1)--> privada;
     char *nomePlaylist;    
-    char *colaboradores[2];
+    char *colaboradores[3];
     int qtdColaboradores;
     int qtdMidias;
     Midia *midia[51];
@@ -21,7 +21,7 @@ Playlist* AlocaPlaylist(){
     Playlist *p=(Playlist*)malloc(sizeof(Playlist));
     p->nomePlaylist=(char*)malloc(50);
     
-    for(int i=0;i<2;i++){
+    for(int i=0;i<3;i++){
         p->colaboradores[i]=(char*)malloc(50);
     }
     for(int i=0;i<51;i++){
@@ -148,4 +148,33 @@ void SalvaPlaylist(Playlist *p, FILE *arquivo){
     for(int i=0;i<p->qtdMidias;i++){
        SalvaMidia(p->midia[i],arquivo);
     }
+}
+
+
+char* RetornaColaborador(Playlist *p){
+    char *aux=(char*)malloc(50);
+    if(p->qtdColaboradores==1){
+        return p->colaboradores[0];
+    }
+    else aux=p->colaboradores[0];
+    for(int i=0;p->qtdColaboradores;i++){
+       TrocaColaborador(p,i,i+1);
+    }
+    p->qtdColaboradores--;
+    return aux;
+}
+
+void TrocaColaborador(Playlist *p, int posicao1, int posicao2){
+    char *aux=(char*)malloc(50);
+    aux=p->colaboradores[posicao1];
+    p->colaboradores[posicao1]=p->colaboradores[posicao2];
+    p->colaboradores[posicao2]=aux;
+}
+
+int RetornaQtdColaborador(Playlist *p){
+    return p->qtdColaboradores;
+}
+
+char* RetornaNomePlaylist(Playlist *p){
+    return p->nomePlaylist;
 }

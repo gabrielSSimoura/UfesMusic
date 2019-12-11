@@ -510,19 +510,38 @@ void EditaPlaylist(Sistema *s,Usuario *usu){
          MenuPlaylist();
         op1=LerInteiros();
         if(op1==1){//Apagar Playlist
+            Playlist *p=AlocaPlaylist();
+            int qtdColab=0;
+            char *colab=(char*)malloc(50);
+            char *colab2=(char*)malloc(50);
+            char *nomePlay=(char*)malloc(50);
             ImprimeUsuario(usu);
             printf("\n\t\tDigite o id da Playlist que deseja apagar: ");
             id1=LerInteiros();
+            p=RetornaPlaylistUsuario(usu,id1);
+            qtdColab=RetornaQtdColaborador(p);
+            nomePlay=RetornaNomePlaylist(p);
+
+            if(qtdColab==1){                
+                colab=RetornaColaborador(p);
+                ApagaPlayColaborador(s,colab,nomePlay);
+            }
+            else if(qtdColab==2){                
+                colab=RetornaColaborador(p);
+                ApagaPlayColaborador(s,colab,nomePlay);
+                colab2=RetornaColaborador(p);
+                ApagaPlayColaborador(s,colab2,nomePlay);
+            }
+
             ApagaPlaylistUsuario(usu,id1);
+            ApagaPlaySeguindoUsuariosSistema(s,nomePlay);
             ImprimeUsuario(usu);
              break;
         }
         else if(op1==2){//Editar Playlist
             Playlist* play=AlocaPlaylist();
             ImprimeUsuario(usu);
-            printf("\n\t\tDigite o id da Playlist que deseja editar: ");
-            id1=LerInteiros();
-            play=RetornaPlaylistUsuario(usu,id1);
+           
             while(1){
                 opMenuAltera=0;
                 midia=0;
@@ -530,8 +549,19 @@ void EditaPlaylist(Sistema *s,Usuario *usu){
                 opMenuAltera=LerInteiros();
                 if(opMenuAltera<1 || opMenuAltera>6){continue;}
                 else if(opMenuAltera==6){opMenuAltera=0;break;}
-                else if(opMenuAltera==1){AlteraPlaylist(play,opMenuAltera);break;}
+                else if(opMenuAltera==1){
+                    ImprimeUsuario(usu);
+                    printf("\n\t\tDigite o id da Playlist que deseja editar: ");
+                    id1=LerInteiros();
+                    play=RetornaPlaylistUsuario(usu,id1);
+                    AlteraPlaylist(play,opMenuAltera);break;
+                }
                 else if(opMenuAltera==2){
+                    ImprimeUsuario(usu);
+                    printf("\n\t\tDigite o id da Playlist que deseja editar: ");
+                    id1=LerInteiros();
+                    play=RetornaPlaylistUsuario(usu,id1);
+                    
                     ImprimePlaylist(play);
                     printf("\n\t\tEscolha a midia que deseja apagar: ");
                     midia=LerInteiros();
@@ -540,6 +570,9 @@ void EditaPlaylist(Sistema *s,Usuario *usu){
                 }
                 else if(opMenuAltera==3){//Altera Ordem Das Midias
                     int p1,p2;
+                    printf("\n\t\tDigite o id da Playlist que deseja editar: ");
+                    id1=LerInteiros();
+                    play=RetornaPlaylistUsuario(usu,id1);
                     ImprimePlaylist(play);
                     printf("\n\t\tEscolha a posicao das midias que deseja aterar: ");
                     p1=LerInteiros();
@@ -549,7 +582,10 @@ void EditaPlaylist(Sistema *s,Usuario *usu){
                     continue;
                 }
                 else if(opMenuAltera==4){//Adicionar Midia a playlist
-                int idp;
+                        int idp;
+                        printf("\n\t\tDigite o id da Playlist que deseja editar: ");
+                        id1=LerInteiros();
+                        play=RetornaPlaylistUsuario(usu,id1);
                         ImprimeAlbunsSistema(s);
                         printf("\n\t\tDidite o Id do Album que deseja visualizar as Midias: ");
                         idp=LerInteiros();
@@ -564,12 +600,22 @@ void EditaPlaylist(Sistema *s,Usuario *usu){
                         continue;
                 }
                 else if(opMenuAltera==5){//MenuPlaylistSeguindo
-                int ops;
-                        
-                        MenuAlteraPlaylistSeguindo();
-                        ops=LeInteiro();
-                        if(op<1 || op>)
 
+                        while(1){
+                            int ops=0,idplay=0;
+                            MenuAlteraPlaylistSeguindo();
+                            ops=LerInteiros();
+                            if(ops<1 || ops>2){continue;}
+                            else if(ops==1){
+                                ImprimePlaylistSeguindoUsuario(usu);
+                                printf("\n\t\tDigite o id da playlist que deseja deixar de seguir: ");
+                                idplay=LerInteiros();
+                                DeixadeSeguirPlaylist(usu,idplay);
+                                ImprimeUsuario(usu);
+                                continue;
+                            }
+                            else if(ops==2){break;}
+                        }
                 }
             }
         }

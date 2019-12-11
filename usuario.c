@@ -18,7 +18,7 @@ struct usuario{
     char *senha;     
     Playlist *play[51];
     Playlist *favoritos;
-    Playlist *seguindo[5];
+    Playlist *seguindo[6];
 };
 
 Usuario* AlocaUsuario(){
@@ -31,7 +31,7 @@ Usuario* AlocaUsuario(){
     for(int i=0;i<51;i++){
         u->play[i]=AlocaPlaylist();
     }   
-    for(int i=0;i<5;i++){
+    for(int i=0;i<6;i++){
         u->seguindo[i]=AlocaPlaylist();
     } 
     return u;
@@ -64,7 +64,6 @@ void CriaUsuario(Usuario* u,char* login,char* senha,int id){
     u->idusuario=id; 
        
 }
-
 void ApagaPlaylistUsuario(Usuario *u, int posicao){
     for(int i=posicao;i<u->qtdplay;i++){
         TrocaPlaylist(u,i,(i+1));
@@ -76,7 +75,13 @@ void DeixadeSeguirPlaylist(Usuario *u,int idplay){
     for(int i=idplay;i<u->qtdPseguindo;i++){
         TrocaPlaylistSeguindo(u,i,(i+1));
     }
-    u->qtdPseguindo++;
+    u->qtdPseguindo--;    
+}
+void ImprimePlaylistSeguindoUsuario(Usuario *u){
+    for(int i=0;i<u->qtdPseguindo;i++){
+        printf("\n\t\tSeguindo [%02d]: ",i);
+        ImprimePlaylist(u->seguindo[i]);
+    }
 }
 
 void TrocaPlaylistSeguindo(Usuario *u, int posicao1, int posicao2){
@@ -139,6 +144,9 @@ char* RetornaSenha(Usuario *u){
 
 Playlist* RetornaPlaylistUsuario(Usuario *u, int idplay){
     return u->play[idplay];
+}
+Playlist* RetornaPlaylistSeguindoUsuario(Usuario *u, int idplay){
+    return u->seguindo[idplay];
 }
 void AtribuiIdUsuario(Usuario *u, int id){
     u->idusuario=id;
@@ -224,5 +232,33 @@ void SalvaUsuario(Usuario *u, FILE *arquivo){
     }
     if(u->favorito==1){
         SalvaPlaylist( u->favoritos,arquivo);
+    }
+}
+
+void IdentificaPlaylist(Usuario *u, char* nomePlay){
+    Playlist *p=AlocaPlaylist();
+    char* nome=(char*)malloc(50);  
+    
+    for(int i=0;i<u->qtdplay;i++){
+        nome=RetornaNomePlaylist(u->play[i]);
+        if(!(strcmp(nomePlay,nome))){
+            p=RetornaPlaylistUsuario(u,i);
+            ApagaPlaylistUsuario(u,i);
+            break;
+        }
+    }
+}
+
+void IdentificaPlaylistSeguindo(Usuario *u, char* nomePlay){
+    Playlist *p=AlocaPlaylist();
+    char* nome=(char*)malloc(50);  
+    
+    for(int i=0;i<u->qtdPseguindo;i++){
+        nome=RetornaNomePlaylist(u->seguindo[i]);
+        if(!(strcmp(nomePlay,nome))){
+            p=RetornaPlaylistSeguindoUsuario(u,i);
+            DeixadeSeguirPlaylist(u,i);
+            break;
+        }
     }
 }

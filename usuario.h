@@ -93,6 +93,9 @@ int RetornaIdUsuario(Usuario *u);
 */
 void ImprimeUsuarioDadosBasicos(Usuario *u);
 
+
+void ImprimePlaylistSeguindoUsuario(Usuario *u);
+
 /*Recebe o Usuario por parametro e uma playlist seguindo;
 *Input: Usuario *u e Playlist *p;
 *Output nenhum;
@@ -124,4 +127,22 @@ Usuario *LerUsuarioArquivo(FILE *arquivo);
 *outputs: nenhum;
 */
 void SalvaUsuario(Usuario *u, FILE *arquivo);
+
+/*Identifica se ha uma playlist com o mesmo nome inserido e a apaga;
+*inputs:Usuario e char de nome da playlist;
+*outputs: nenhum;
+*/
+void IdentificaPlaylist(Usuario *u, char* nomePlay);
+
+/*Identifica se ha uma playlist seguida pelo usuario com o mesmo nome inserido e a apaga;
+*inputs:Usuario e char de nome da playlist;
+*outputs: nenhum;
+*/
+void IdentificaPlaylistSeguindo(Usuario *u, char* nomePlay);
+
+/*Retorna a Playlist Seguida escolhida pela função;
+*inputs:Usuario e int da posicao da playlist no vetor;
+*outputs: Playlist* playlist;
+*/
+Playlist* RetornaPlaylistSeguindoUsuario(Usuario *u, int idplay);
 #endif 

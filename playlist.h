@@ -93,4 +93,28 @@ Playlist *LerPlaylistArquivo(FILE *arquivo);
 *outputs: nenhum;
 */
 void SalvaPlaylist(Playlist *p, FILE *arquivo);
+
+/*Retorna a Quantidade de colaboradores;
+*inputs:Playlist *p;
+*outputs: int;
+*/
+int RetornaQtdColaborador(Playlist *p);
+
+/*Retorna o nome do colaboradores;
+*inputs:Playlist *p;
+*outputs: char*;
+*/
+char* RetornaColaborador(Playlist *p);
+
+/*Retorna o nome da Playlist;
+*inputs:Playlist *p;
+*outputs: char*;
+*/
+char* RetornaNomePlaylist(Playlist *p);
+
+/*Troca a Posição dos colaboradores, "apagando-os";
+*inputs:Playlist *p, posiçao atual e posterior;
+*outputs: nenhum;
+*/
+void TrocaColaborador(Playlist *p, int posicao1, int posicao2);
 #endif

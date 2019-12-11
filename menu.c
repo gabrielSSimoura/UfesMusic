@@ -107,11 +107,11 @@ void MenuAlteraPlaylist(){
     
     printf("\n\t\tO que deseja Alterar: ");    
     printf("\n\t\t|[01]----Nome da Playlist---|\t\t\n");
-    printf("\t\t|[02]------Apagar Midia-----|\t\t\n");      
-    printf("\t\t|[03]-Alterar ordem Midias--|\t\t\n");
-    printf("\t\t|[04]----Adicionar Midia----|\t\t\n");
-    printf("\t\t|[05]----Adicionar Midia----|\t\t\n");
-    printf("\t\t|[06]------Sair do Menu-----|\t\t\n");
+    printf("\t\t|[02]------Apagar Midia------|\t\t\n");      
+    printf("\t\t|[03]-Alterar ordem Midias---|\t\t\n");
+    printf("\t\t|[04]----Adicionar Midia-----|\t\t\n");
+    printf("\t\t|[05]Editar Playlist Seguindo|\t\t\n");
+    printf("\t\t|[06]------Sair do Menu------|\t\t\n");
     printf("\t\tDigite uma das Opcoes: "); 
     setbuf(stdin, NULL); 
 

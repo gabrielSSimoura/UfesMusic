@@ -131,6 +131,18 @@ int RetornaQtdUsuariosSistema(Sistema *s);
 */
 void OpcaoPesquisarUsuario(Sistema *s, int idusuario_atual);
 
+/*Identifica se o colaborador possui a mesma playlist que 
+    esta sendo apagada pelo Usuario atual e a apaga;
+*inputs:Sistema *s, char com o login do Usuario e char com o nome da playlist;
+*outputs: nenhum;
+*/
+void ApagaPlayColaborador(Sistema *s, char *login, char *nomeplay);
 
+/*Identifica se outro Usuario segue a mesma playlist que 
+    esta sendo apagada pelo Usuario atual e a apaga;
+*inputs:Sistema *s e char com o nome da playlist;
+*outputs: nenhum;
+*/
+void ApagaPlaySeguindoUsuariosSistema(Sistema *s,char *nomeplay);
 
 #endif 
